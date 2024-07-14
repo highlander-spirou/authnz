@@ -5,9 +5,9 @@ import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-import dashboard from "./routers/dashboard";
-import authRoute from './routers/auth'
 
+import authRouter from "./routers/auth/router";
+import userRouter from "./routers/user/router";
 
 dotenv.config();
 
@@ -15,13 +15,18 @@ const app = express();
 
 // Module register
 app.use(morgan("dev"));
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 app.use(bodyParser.json());
 
 // Route register
-app.use("/dashboard", dashboard);
-app.use("/auth", authRoute);
+app.use("/user", userRouter);
+app.use("/auth", authRouter);
 
 // Run the server
 const server = http.createServer(app);
