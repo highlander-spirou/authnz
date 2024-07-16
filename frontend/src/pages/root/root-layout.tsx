@@ -1,26 +1,34 @@
 import { Outlet, redirect } from "react-router-dom";
-import { addUser, userStore } from "@/store/user";
-import { fetchUserInfo } from "../user/query/fetcher";
+import Navbar from "./components/navbar";
+import PageIndicator from "./components/page-indicator";
+import { QueryClient } from "@tanstack/react-query";
+import { getUserParams } from "../user/query/params";
+import userKeys from "../user/query/queryKeyFactory";
 
-export const loader = async ({ request }): Promise<any> => {
-  const { user } = userStore;
-  const url = new URL(request.url);
-  if (!user) {
-    const userInfo = await fetchUserInfo();
-    if (!userInfo) {
-      return redirect(`/login?callbackURL=${url.pathname}`);
+export const loader =
+  (queryClient: QueryClient) =>
+  async ({ request }): Promise<any> => {
+    const user = queryClient.getQueryData(userKeys.all);
+    if (!user) {
+      const userInfo = await queryClient.fetchQuery(getUserParams());
+      if (!userInfo) {
+        const url = new URL(request.url);
+        return redirect(`/login?callbackURL=${url.pathname}`);
+      }
+      return userInfo;
     }
-    addUser(userInfo);
-  }
 
-  return user;
-};
+    return user;
+  };
 
 const RootLayout = () => {
   return (
     <>
-      <div>Root</div>
-      <Outlet />
+      <div className="min-h-screen bg-gray-100">
+        <Navbar />
+        <PageIndicator />
+        <Outlet />
+      </div>
     </>
   );
 };

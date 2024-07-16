@@ -1,13 +1,31 @@
+import AuthLayout from "./layout";
 import Login, { action as loginAction } from "./login";
-import { action as verifyEmailAction } from "./verify-email";
+import Register, { action as registerAction } from "./register";
 
 const router = [
   {
     path: "/login",
-    element: <Login />,
-    errorElement: <Login />,
-    action: loginAction,
+    element: <AuthLayout />,
+    children: [
+      {
+        index: true,
+        element: <Login />,
+        errorElement: <Login />,
+        action: loginAction,
+      },
+    ],
   },
-  { path: "/verify-email", action: verifyEmailAction },
+  {
+    path: "/register",
+    element: <AuthLayout />,
+    children: [
+      {
+        index: true,
+        element: <Register />,
+        errorElement: <Register />,
+        action: registerAction,
+      },
+    ],
+  },
 ];
 export default router;

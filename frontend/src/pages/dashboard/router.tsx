@@ -1,7 +1,7 @@
 import App from ".";
 
 const router = {
-  path: "/dashboard",
+  path: "/",
   children: [
     { index: true, element: <App /> },
   ],

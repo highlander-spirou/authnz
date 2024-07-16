@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 if (!import.meta.env.VITE_SERVER_URL) {
   throw new Error("No environment variable: SERVER_URL");
@@ -20,3 +20,12 @@ export const fetchUserInfo = async () => {
     return null;
   }
 };
+
+export const changeUserInfo = async (payload) => {
+  try {
+    const response = await axiosClient.put("/info", payload);
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+}

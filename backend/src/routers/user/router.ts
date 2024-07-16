@@ -7,5 +7,6 @@ const userRouter = Router();
 userRouter.use(userSessionGuard)
 
 userRouter.get('/info', userController.getInfo)
+userRouter.put('/info', userController.changeInfo)
 
 export default userRouter;

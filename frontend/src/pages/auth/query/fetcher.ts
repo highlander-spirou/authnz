@@ -26,3 +26,18 @@ export const loginRequest = async (
     }
   }
 };
+
+export const registerRequest = async (
+  registerInfo
+): Promise<{ data: any; error: any }> => {
+  try {
+    const response = await axiosClient.post("/register", registerInfo);
+    return { data: response.data, error: null };
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return { data: null, error: error.response?.data.message };
+    } else {
+      return { data: null, error: "Unknown error" };
+    }
+  }
+};

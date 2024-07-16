@@ -1,7 +1,7 @@
 import { formSerialize } from "@/lib/form-serializer";
-import { loginRequest } from "./query/fetcher";
+import RegisterForm from "./components/register-form";
+import { registerRequest } from "./query/fetcher";
 import { redirect, useRouteError } from "react-router-dom";
-import LoginForm from "./components/login-form";
 import { AxiosError } from "axios";
 import ErrorSection from "./components/error-section";
 
@@ -10,33 +10,24 @@ export const action = async ({ request }) => {
     throw new Response("", { status: 405 });
   }
 
-  const loginInfo = await formSerialize(request);
-  const { data, error } = await loginRequest(loginInfo);
+  const registerInfo = await formSerialize(request);
+  const { data, error } = await registerRequest(registerInfo);
 
   if (!data) {
+    console.log("fasjkf", error);
     throw new Error(error);
   }
-
-  const callbackURL = new URLSearchParams(new URL(request.url).search).get(
-    "callbackURL"
-  );
-
-  if (!callbackURL) {
-    return redirect("/");
-  } else {
-    return redirect(callbackURL);
-  }
+  return redirect("/login");
 };
-
-const Login = () => {
+const Register = () => {
   const errors = useRouteError() as null | AxiosError<{ message: string }>;
 
   return (
     <>
       <ErrorSection errors={errors} />
-      <LoginForm />
+      <RegisterForm />
     </>
   );
 };
 
-export default Login;
+export default Register;

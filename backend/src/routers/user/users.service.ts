@@ -1,4 +1,5 @@
 import prisma from "../../lib/prisma";
+import { putInfoProps } from "./dto/putInfoDTO";
 import { UserNotFoundException } from "./user.exceptions";
 
 const service = {
@@ -14,6 +15,9 @@ const service = {
       name: !user.name ? "Anonymous" : user.name,
       email_verified_at: user.email_verified_at,
     };
+  },
+  changeProfile: async (userId: number, payload: putInfoProps) => {
+    await prisma.user.update({ where: { id: userId }, data: payload });
   },
 };
 

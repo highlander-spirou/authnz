@@ -16,6 +16,10 @@ body {
 }
 
 .form-grid {
+    @apply grid grid-cols-6 gap-6
+}
+
+.form-item {
     @apply col-span-6 sm:col-span-4
 }
 
@@ -27,6 +31,78 @@ body {
     @apply underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
 }
 
-.submit-section {
-    @apply flex items-center justify-end mt-4
+.btn-dropdown {
+    @apply inline-flex items-center justify-center px-3 py-2 text-sm font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:ring-1 focus:ring-indigo-400 active:bg-gray-100 hover:bg-gray-100 transition ease-in-out duration-150
+}
+
+.auth-submit-section {
+    @apply flex items-center justify-end mt-4 gap-3
+}
+
+
+.dropdown-group-label {
+    @apply block px-4 py-2 text-xs text-gray-400
+}
+
+.nav-bar {
+    @apply bg-white border-b border-gray-100
+}
+
+/* This class use to restrict the navbar to span all the screen width
+This is necessary for ultra-wide screen */
+.nav-bar-restrict-grow {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+}
+
+.nav-layout {
+    @apply flex justify-between h-16
+}
+
+.nav-layout>.right-side {
+    @apply hidden sm:flex sm:items-center sm:ms-6
+}
+
+.logo-wrapper {
+    @apply shrink-0 flex items-center
+}
+
+.nav-links {
+    @apply hidden space-x-8 sm:-my-px sm:ms-10 sm:flex
+}
+
+.nav-link {
+    @apply inline-flex items-center justify-center w-20 px-1 pt-1 text-sm text-gray-500 hover:text-gray-700 border-b-2 focus:outline-none focus:border focus:border-indigo-400 transition duration-150 ease-in-out
+}
+
+.nav-link.active {
+    @apply border-indigo-400 hover:border-indigo-600 font-semibold
+}
+
+.nav-link.inactive {
+    @apply border-b-transparent hover:border-b-gray-300 font-normal
+}
+
+.nav-link-mobile {
+    @apply block w-full ps-3 pe-4 py-2 border-l-4 text-start text-base font-medium focus:outline-none transition duration-150 ease-in-out
+}
+
+.nav-link-mobile.active {
+    @apply text-indigo-700 bg-indigo-50 border-indigo-400 focus:border-indigo-700 focus:text-indigo-800 focus:bg-indigo-100
+}
+
+.nav-link-mobile.inactive {
+    @apply text-gray-600 hover:text-gray-800 border-transparent hover:border-gray-300 hover:bg-gray-50 focus:outline-none focus:text-gray-800 focus:bg-gray-50
+}
+
+
+.user-submit-section {
+    @apply flex flex-row-reverse items-center justify-between px-4 py-3 bg-gray-50 text-end sm:px-6 shadow sm:rounded-bl-md sm:rounded-br-md
+}
+
+.user-status-success {
+    @apply ml-1 font-medium text-sm text-green-600
+}
+
+.user-status-error {
+    @apply ml-1 font-medium text-sm text-red-600
 }
