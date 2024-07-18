@@ -11,13 +11,15 @@ export const action = async ({ request }) => {
   }
 
   const registerInfo = await formSerialize(request);
-  const { data, error } = await registerRequest(registerInfo);
-
-  if (!data) {
-    console.log("fasjkf", error);
-    throw new Error(error);
+  
+  try {
+    await registerRequest(registerInfo);
+    return redirect("/login");
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw new Error(error.response?.data.message);
+    }
   }
-  return redirect("/login");
 };
 const Register = () => {
   const errors = useRouteError() as null | AxiosError<{ message: string }>;

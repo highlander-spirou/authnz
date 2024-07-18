@@ -1,8 +1,10 @@
+import queryClient from "@/query-client";
 import AuthLayout from "./layout";
-import Login, { action as loginAction } from "./login";
+import Login, { action as loginAction, loader as loginLoader } from "./login";
 import Register, { action as registerAction } from "./register";
+import { RouteObject } from "react-router-dom";
 
-const router = [
+const router: RouteObject[] = [
   {
     path: "/login",
     element: <AuthLayout />,
@@ -11,7 +13,9 @@ const router = [
         index: true,
         element: <Login />,
         errorElement: <Login />,
-        action: loginAction,
+        loader: loginLoader(queryClient),
+        action: loginAction(queryClient),
+
       },
     ],
   },

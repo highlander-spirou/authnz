@@ -38,7 +38,13 @@ const RegisterForm = () => {
     },
   });
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    submit(values, { method: "POST", action: "" });
+    const submitValue = {
+      email: values.email,
+      password: values.password,
+      ...(values.name && { name: values.name }),
+    };
+    
+    submit(submitValue, { method: "POST", action: "" });
     form.reset();
   };
   return (

@@ -43,7 +43,6 @@ const DropDownLink: React.FC<DropDownLinkProps> = ({
 
 const DropdownProfile = () => {
   const { data: user } = useQuery<UserInterface>(getUserParams());
-
   return (
     <>
       <NavigationMenu delayDuration={2000}>

@@ -1,5 +1,5 @@
 import queryClient from "@/query-client";
-import { fetchUserInfo, changeUserInfo } from "./fetcher";
+import { fetchUserInfo, changeUserInfo, changeUserEmail } from "./fetcher";
 import userKeys from "./queryKeyFactory";
 
 if (!import.meta.env.VITE_REACT_ROUTER_STALE_TIME) {
@@ -16,6 +16,14 @@ export const updateUserParams = () => ({
   mutationFn: (payload) => changeUserInfo(payload),
   onSuccess: () => {
     queryClient.invalidateQueries({ queryKey: userKeys.all });
-    return true
+    return true;
+  },
+});
+
+export const updateEmailParams = () => ({
+  mutationFn: (payload) => changeUserEmail(payload),
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: userKeys.all });
+    return true;
   },
 });

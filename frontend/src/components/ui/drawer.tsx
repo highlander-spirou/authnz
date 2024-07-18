@@ -1,17 +1,12 @@
 import React from "react";
 import { Drawer } from "vaul";
 
-type DrawerRootProps = {
-  direction?: "top" | "bottom" | "right" | "left";
-  children: React.ReactNode;
-};
-
-export const DrawerRoot: React.FC<DrawerRootProps> = ({
+export const DrawerRoot = ({
   direction = "left",
-  children,
-}) => {
-  return <Drawer.Root direction={direction}>{children}</Drawer.Root>;
-};
+  ...props
+}: React.ComponentProps<typeof Drawer.Root>) => (
+  <Drawer.Root direction={direction} {...props} />
+);
 
 export const DrawerTrigger = ({ children }) => {
   return <Drawer.Trigger asChild>{children}</Drawer.Trigger>;
@@ -27,3 +22,7 @@ export const DrawerContent = ({ children }) => {
     </Drawer.Portal>
   );
 };
+
+export const DrawerClose = ({
+  ...props
+}: React.ComponentProps<typeof Drawer.Close>) => <Drawer.Close {...props} />;

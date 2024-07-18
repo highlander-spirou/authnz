@@ -13,19 +13,18 @@ const axiosClient = axios.create({
 });
 
 export const fetchUserInfo = async () => {
-  try {
-    const response = await axiosClient.get("/info");
-    return response.data;
-  } catch (error) {
-    return null;
-  }
+  const response = await axiosClient.get("/info");
+  return response.data;
+
 };
 
 export const changeUserInfo = async (payload) => {
-  try {
-    const response = await axiosClient.put("/info", payload);
-    return response.data;
-  } catch (error) {
-    return null;
-  }
-}
+  const response = await axiosClient.put("/info", payload);
+  return response.data;
+};
+
+
+export const changeUserEmail = async (payload) => {
+  const response = await axiosClient.put("/info/email", payload);
+  return response.data;
+};

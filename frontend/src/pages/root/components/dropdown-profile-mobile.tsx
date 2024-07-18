@@ -1,9 +1,13 @@
 import {
+  DrawerClose,
   DrawerContent,
   DrawerRoot,
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { cn } from "@/lib/utils";
+import { useQuery } from "@tanstack/react-query";
+import { getUserParams } from "@user/query/params";
+import { UserInterface } from "@user/types";
 import { NavLink } from "react-router-dom";
 
 type MobileNavLinkProps = {
@@ -19,19 +23,18 @@ const MobileNavLink: React.FC<MobileNavLinkProps> = ({
 }) => {
   return (
     <>
-      <NavLink
-        to={link}
-        className={({ isActive }) =>
-          cn(className, "nav-link-mobile", isActive ? "active" : "inactive")
-        }
-      >
-        {label}
-      </NavLink>
+      <DrawerClose asChild>
+        <NavLink to={link} className={cn(className, "nav-link-mobile")}>
+          {label}
+        </NavLink>
+      </DrawerClose>
     </>
   );
 };
 
 export function MobileDrawer() {
+  const { data: user } = useQuery<UserInterface>(getUserParams());
+
   return (
     <DrawerRoot>
       <DrawerTrigger>
@@ -63,18 +66,23 @@ export function MobileDrawer() {
             </div>
             <div>
               <div className="font-medium text-base text-gray-800">
-                senior_pika
+                {user!.name}
               </div>
-              <div className="font-medium text-sm text-gray-500">abc's Team</div>
+              <div className="font-medium text-sm text-gray-500">
+                abc's Team
+              </div>
             </div>
           </div>
 
           <div className="mt-3 space-y-1">
             <MobileNavLink label="Profile" link="/user/profile" />
             <MobileNavLink label="API Tokens" link="/user/api-tokens" />
-            <MobileNavLink label="Logout" link="/logout" className="!text-rose-400 hover:!text-red-500"/>
+            <MobileNavLink
+              label="Logout"
+              link="/logout"
+              className="!text-rose-400 hover:!text-red-500"
+            />
 
-            
             <div className="border-t border-gray-200"></div>
 
             <div className="block px-4 py-2 text-xs text-gray-400">

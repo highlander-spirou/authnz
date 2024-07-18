@@ -83,20 +83,15 @@ This is necessary for ultra-wide screen */
 }
 
 .nav-link-mobile {
-    @apply block w-full ps-3 pe-4 py-2 border-l-4 text-start text-base font-medium focus:outline-none transition duration-150 ease-in-out
+    @apply block w-full ps-3 pe-4 py-2 border-l-4 text-start text-base font-medium focus:outline-none transition duration-150 ease-in-out text-gray-600 hover:text-gray-800 border-transparent hover:border-gray-300 hover:bg-gray-50 focus:text-gray-800 focus:bg-gray-50
 }
 
 .nav-link-mobile.active {
     @apply text-indigo-700 bg-indigo-50 border-indigo-400 focus:border-indigo-700 focus:text-indigo-800 focus:bg-indigo-100
 }
 
-.nav-link-mobile.inactive {
-    @apply text-gray-600 hover:text-gray-800 border-transparent hover:border-gray-300 hover:bg-gray-50 focus:outline-none focus:text-gray-800 focus:bg-gray-50
-}
-
-
 .user-submit-section {
-    @apply flex flex-row-reverse items-center justify-between px-4 py-3 bg-gray-50 text-end sm:px-6 shadow sm:rounded-bl-md sm:rounded-br-md
+    @apply flex flex-row-reverse items-center justify-between mt-5
 }
 
 .user-status-success {

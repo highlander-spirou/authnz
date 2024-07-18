@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 if (!import.meta.env.VITE_SERVER_URL) {
   throw new Error("No environment variable: SERVER_URL");
@@ -12,32 +12,22 @@ const axiosClient = axios.create({
   },
 });
 
-export const loginRequest = async (
-  loginInfo
-): Promise<{ data: any; error: any }> => {
-  try {
-    const response = await axiosClient.post("/login", loginInfo);
-    return { data: response.data, error: null };
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      return { data: null, error: error.response?.data.message };
-    } else {
-      return { data: null, error: "Unknown error" };
-    }
-  }
+export const loginRequest = async (loginInfo) => {
+  const response = await axiosClient.post("/login", loginInfo);
+  return response;
 };
 
-export const registerRequest = async (
-  registerInfo
-): Promise<{ data: any; error: any }> => {
-  try {
-    const response = await axiosClient.post("/register", registerInfo);
-    return { data: response.data, error: null };
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      return { data: null, error: error.response?.data.message };
-    } else {
-      return { data: null, error: "Unknown error" };
-    }
-  }
+export const registerRequest = async (registerInfo) => {
+  const response = await axiosClient.post("/register", registerInfo);
+  return response;
+};
+
+export const sendVerifyEmail = async () => {
+  const response = await axiosClient.get("/send-email-verify");
+  return response;
+};
+
+export const verifyEmail = async (token: string) => {
+  const response = await axiosClient.get("/verify-email/" + token);
+  return response;
 };

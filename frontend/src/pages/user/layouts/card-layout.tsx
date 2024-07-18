@@ -1,0 +1,11 @@
+const CardLayout = ({ children }) => {
+  return (
+    <>
+      <div className="md:grid md:grid-cols-3 md:gap-6 mt-10 sm:mt-0">
+        {children}
+      </div>
+    </>
+  );
+};
+
+export default CardLayout;

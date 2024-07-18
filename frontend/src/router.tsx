@@ -5,6 +5,7 @@ import dashboardRouter from "./pages/dashboard/router";
 import RootLayout, { loader as rootLoader } from "./pages/root/root-layout";
 import userRouter from "./pages/user/router";
 import queryClient from "./query-client";
+import verifyEmailRouter from "./pages/verify-email/router";
 
 const createRouter = (): any => {
   return createBrowserRouter([
@@ -16,6 +17,7 @@ const createRouter = (): any => {
       children: [dashboardRouter, userRouter],
     },
     ...loginRouter,
+    verifyEmailRouter
   ]);
 };
 
