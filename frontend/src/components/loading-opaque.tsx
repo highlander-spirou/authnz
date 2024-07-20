@@ -1,19 +1,19 @@
-import React from "react";
+import React from "react"
 
 type LoadingOpaqueProps = {
-  isLoading: boolean;
-  children: React.ReactNode;
-};
+	isLoading: boolean
+	children: React.ReactNode
+}
 
 const LoadingOpaque: React.FC<LoadingOpaqueProps> = ({
-  isLoading,
-  children,
+	isLoading,
+	children,
 }) => {
-  return (
-    <div className={isLoading ? "opacity-40 pointer-events-none" : ""}>
-      {children}
-    </div>
-  );
-};
+	return (
+		<div className={isLoading ? "opacity-40 pointer-events-none" : ""}>
+			{children}
+		</div>
+	)
+}
 
-export default LoadingOpaque;
+export default LoadingOpaque

@@ -1,7 +1,7 @@
-import { z } from "zod";
+import { z } from "zod"
 
 export const putEmailDTO = z.object({
-  email: z.string().email(),
-});
+	email: z.string().email(),
+})
 
-export type putEmailProps = z.infer<typeof putEmailDTO>;
+export type putEmailProps = z.infer<typeof putEmailDTO>

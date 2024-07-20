@@ -1,5 +1,5 @@
-import { z } from "zod";
+import { z } from "zod"
 
 export const resetPwdDTO = z.object({
-  password: z.string().min(1),
-});
+	password: z.string().min(1),
+})

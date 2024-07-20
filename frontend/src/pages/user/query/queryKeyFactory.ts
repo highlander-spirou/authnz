@@ -1,5 +1,5 @@
 const userKeys = {
-  all: ["user"] as const,
-};
+	all: ["user"] as const,
+}
 
-export default userKeys;
+export default userKeys
