@@ -1,6 +1,7 @@
 import CardDivider from "./components/card-divider";
 import UpdateName from "./slices/update-name";
 import EmailManagement from "./slices/email-management";
+import ChangePassword from "./slices/change-password";
 
 const UserInfo = () => {
   return (
@@ -9,6 +10,8 @@ const UserInfo = () => {
         <EmailManagement />
         <CardDivider />
         <UpdateName />
+        <CardDivider />
+        <ChangePassword />
       </main>
     </>
   );

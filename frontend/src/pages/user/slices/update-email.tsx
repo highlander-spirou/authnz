@@ -1,4 +1,4 @@
-import BtnWithLoading from "@/components/custom-ui/btn-with-loading";
+import InputWithLoading from "@/components/custom-ui/input-with-loading";
 import {
   FormControl,
   FormField,
@@ -9,7 +9,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { CardForm, CardMainLayout } from "@user/layouts";
-import { updateEmailParams } from "@user/query/params";
+import { updateEmailOption } from "@user/query/options";
 import { UserInterface } from "@user/types";
 import { useEffect, useState } from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
@@ -42,7 +42,7 @@ const UpdateEmailFormFields: React.FC<UpdateEmailFormFieldsProps> = ({
             <FormLabel className="input-label">Change email address</FormLabel>
             <FormControl>
               <div>
-                <BtnWithLoading isLoading={status.isPending} {...field} />
+                <InputWithLoading isLoading={status.isPending} {...field} />
               </div>
             </FormControl>
             <FormMessage />
@@ -56,7 +56,7 @@ const UpdateEmailFormFields: React.FC<UpdateEmailFormFieldsProps> = ({
 const UpdateEmail = ({ user }: { user: UserInterface }) => {
   const [statusText, setStatusText] = useState<string>("");
   const { isError, isSuccess, isPending, status, reset, mutate } = useMutation(
-    updateEmailParams()
+    updateEmailOption()
   );
 
   const form = useForm<schemaType>({
@@ -72,9 +72,9 @@ const UpdateEmail = ({ user }: { user: UserInterface }) => {
 
   useEffect(() => {
     if (status === "error") {
-      setStatusText("Error while changing the name!");
+      setStatusText("Error while updating your email!");
     } else if (status === "success") {
-      setStatusText("Name changed");
+      setStatusText("Email changed");
     } else {
       setStatusText("");
     }

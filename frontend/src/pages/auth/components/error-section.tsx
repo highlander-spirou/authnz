@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-const ErrorSection = ({ errors }) => {
+const ErrorSection = ({ errors }: { errors: string }) => {
   return (
     <>
       <div className={cn(!errors ? "hidden" : "block", "error-section mb-4")}>
@@ -8,7 +8,7 @@ const ErrorSection = ({ errors }) => {
           Whoops! Something went wrong.
         </p>
         <ul className="mt-3 list-disc list-inside text-sm text-red-600">
-          <li>{errors && errors.message}</li>
+          <li>{errors}</li>
         </ul>
       </div>
     </>

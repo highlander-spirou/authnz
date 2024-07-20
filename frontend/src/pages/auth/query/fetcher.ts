@@ -31,3 +31,13 @@ export const verifyEmail = async (token: string) => {
   const response = await axiosClient.get("/verify-email/" + token);
   return response;
 };
+
+export const sendResetPwd = async (payload) => {
+  const response = await axiosClient.post("/send-password-reset", payload);
+  return response;
+};
+
+export const resetPassword = async (token: string, payload) => {
+  const response = await axiosClient.post("/reset-password/" + token, payload);
+  return response;
+};

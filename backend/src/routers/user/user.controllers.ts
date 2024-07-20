@@ -1,54 +1,52 @@
 import type { Request, Response } from "express";
 import userService from "./users.service";
-import * as UserException from "./user.exceptions";
-import { ZodError } from "zod";
-import { putEmailDTO, putInfoDTO } from "./dto";
+import { putEmailDTO, putInfoDTO, putPasswordDTO } from "./dto";
+import HTTPHandler from "../../http-handler";
 
 const userController = {
   getInfo: async (req: Request, res: Response) => {
-    const { userId } = req.context;
-    try {
+    const { data, error } = await HTTPHandler(async () => {
+      const { userId } = req.context;
       const userInfo = await userService.getInfo(userId);
-      return res.json(userInfo);
-    } catch (error) {
-      if (error instanceof UserException.UserNotFoundException) {
-        return res
-          .status(401)
-          .json({ message: "Unable to identify user, please login again" });
-      } else {
-        return res.status(500).end();
-      }
+      return userInfo;
+    });
+    if (error) {
+      return res.status(error.status).json(error.message);
     }
+    return res.json(data);
   },
   changeInfo: async (req: Request, res: Response) => {
-    try {
+    const { data, error } = await HTTPHandler(async () => {
       const { userId } = req.context;
       const payload = await putInfoDTO.parseAsync(req.body);
       await userService.changeProfile(userId, payload);
-      return res.status(200).json({ message: "OK" });
-    } catch (error) {
-      if (error instanceof ZodError) {
-        return res.status(400).json({ message: "Payload Error" });
-      }
+    });
+    if (error) {
+      return res.status(error.status).json(error.message);
     }
+    return res.status(200).json({ message: "OK" });
   },
   changeEmail: async (req: Request, res: Response) => {
-    try {
+    const { data, error } = await HTTPHandler(async () => {
       const { userId } = req.context;
       const payload = await putEmailDTO.parseAsync(req.body);
       await userService.changeEmail(userId, payload);
-      return res.status(200).json({ message: "OK" });
-    } catch (error) {
-      if (error instanceof ZodError) {
-        return res.status(400).json({ message: "Payload Error" });
-      } else if (error instanceof UserException.UserNotFoundException) {
-        return res
-          .status(401)
-          .json({ message: "Unable to identify user, please login again" });
-      } else if (error instanceof UserException.UserEmailNotVerifiedException) {
-        return res.status(403).json({ message: "Email not verified" });
-      }
+    });
+    if (error) {
+      return res.status(error.status).json(error.message);
     }
+    return res.status(200).json({ message: "OK" });
+  },
+  changePassword: async (req: Request, res: Response) => {
+    const { data, error } = await HTTPHandler(async () => {
+      const { userId } = req.context;
+      const payload = await putPasswordDTO.parseAsync(req.body);
+      await userService.changePassword(userId, payload);
+    });
+    if (error) {
+      return res.status(error.status).json(error.message);
+    }
+    return res.status(200).json({ message: "OK" });
   },
 };
 

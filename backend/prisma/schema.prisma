@@ -8,15 +8,26 @@ datasource db {
 }
 
 model User {
-  id                  Int                   @id @default(autoincrement())
-  email               String                @unique
-  name                String?
-  password            String
-  email_verified_at   DateTime?
-  email_verification  EmailVerification?
+  id                    Int                   @id @default(autoincrement())
+  email                 String                @unique
+  name                  String?
+  password              String
+  email_verified_at     DateTime?
+  email_verification    EmailVerification?
+  password_reset_token  PasswordResetToken?
 }
 
 model EmailVerification {
+  id                Int         @id @default(autoincrement())
+  expired_at        DateTime?
+  retries           Int
+  request_penalty   DateTime?
+  token             String
+  userId            Int         @unique
+  user              User        @relation(fields: [userId], references: [id])
+}
+
+model PasswordResetToken {
   id                Int         @id @default(autoincrement())
   expired_at        DateTime?
   retries           Int

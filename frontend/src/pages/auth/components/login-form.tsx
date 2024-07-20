@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Form, useSubmit } from "react-router-dom";
+import { Form, Link, useSubmit } from "react-router-dom";
 import { z } from "zod";
 
 const LoginForm = () => {
@@ -92,12 +92,12 @@ const LoginForm = () => {
             />
           </div>
           <div className="auth-submit-section">
-            <a
-              href=""
+            <Link
+              to="/forgot-password"
               className="btn-link"
             >
               Forgot password?
-            </a>
+            </Link>
             <button
               type="submit"
               className="btn-black ms-2"

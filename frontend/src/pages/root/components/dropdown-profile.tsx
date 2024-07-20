@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
-import { getUserParams } from "@user/query/params";
+import { getUserOption } from "@user/query/options";
 import { UserInterface } from "@user/types";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -42,7 +42,7 @@ const DropDownLink: React.FC<DropDownLinkProps> = ({
 };
 
 const DropdownProfile = () => {
-  const { data: user } = useQuery<UserInterface>(getUserParams());
+  const { data: user } = useQuery<UserInterface>(getUserOption());
   return (
     <>
       <NavigationMenu delayDuration={2000}>

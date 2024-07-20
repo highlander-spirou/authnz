@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { UserInterface } from "../types";
-import { getUserParams } from "@user/query/params";
+import { getUserOption } from "@user/query/options";
 
 import { CardLayout, CardName } from "@user/layouts";
 import SendVerifyEmail from "./verify-email";
 import UpdateEmail from "./update-email";
 
 const EmailManagement = () => {
-  const { data: user } = useQuery<UserInterface>(getUserParams());
+  const { data: user } = useQuery<UserInterface>(getUserOption());
   return (
     <>
       <CardLayout>

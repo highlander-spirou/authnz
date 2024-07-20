@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { SvgSpinners } from "../loading-svg";
 import { forwardRef, Ref } from "react";
 
-const BtnWithLoading = forwardRef<HTMLInputElement, {isLoading: boolean}>(
+const InputWithLoading = forwardRef<HTMLInputElement, {isLoading: boolean}>(
   ({ isLoading, ...props }, ref: Ref<HTMLInputElement>) => {
     return (
       <>
@@ -23,4 +23,4 @@ const BtnWithLoading = forwardRef<HTMLInputElement, {isLoading: boolean}>(
     );
   }
 );
-export default BtnWithLoading;
+export default InputWithLoading;

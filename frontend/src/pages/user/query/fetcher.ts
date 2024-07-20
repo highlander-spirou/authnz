@@ -28,3 +28,8 @@ export const changeUserEmail = async (payload) => {
   const response = await axiosClient.put("/info/email", payload);
   return response.data;
 };
+
+export const changeUserPwd = async (payload) => {
+  const response = await axiosClient.put("/info/password", payload);
+  return response.data;
+}

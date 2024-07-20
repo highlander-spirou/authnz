@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { type UseFormReturn } from "react-hook-form";
 
 import { useMutation } from "@tanstack/react-query";
-import { updateUserParams } from "../query/params";
+import { updateUserOption } from "../query/options";
 import queryClient from "@/query-client";
 import userKeys from "../query/queryKeyFactory";
 import { UserInterface } from "../types";
@@ -18,7 +18,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import BtnWithLoading from "@/components/custom-ui/btn-with-loading";
+import InputWithLoading from "@/components/custom-ui/input-with-loading";
 import { CardForm, CardLayout, CardMainLayout, CardName } from "@user/layouts";
 
 const schema = z.object({
@@ -48,7 +48,7 @@ const UpdateNameFormFields: React.FC<UpdateNameFormFieldsProps> = ({
             <FormLabel className="input-label">Username</FormLabel>
             <FormControl>
               <div>
-                <BtnWithLoading isLoading={status.isPending} {...field} />
+                <InputWithLoading isLoading={status.isPending} {...field} />
               </div>
             </FormControl>
             <FormMessage />
@@ -76,7 +76,7 @@ const UpdateName = () => {
     status,
     reset,
     mutate: updateUserName,
-  } = useMutation(updateUserParams());
+  } = useMutation(updateUserOption());
 
   const onSubmit = async (values: schemaType) => {
     updateUserName(values);

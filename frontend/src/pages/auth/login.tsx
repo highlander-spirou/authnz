@@ -1,11 +1,11 @@
 import { formSerialize } from "@/lib/form-serializer";
 import { loginRequest } from "./query/fetcher";
-import { redirect, useRouteError } from "react-router-dom";
+import { redirect, useActionData } from "react-router-dom";
 import LoginForm from "./components/login-form";
 import { AxiosError } from "axios";
 import ErrorSection from "./components/error-section";
 import { QueryClient } from "@tanstack/react-query";
-import { getUserParams } from "@user/query/params";
+import { getUserOption } from "@user/query/options";
 import userKeys from "@user/query/queryKeyFactory";
 
 export const action =
@@ -14,26 +14,27 @@ export const action =
     if (request.method !== "POST") {
       throw new Response("", { status: 405 });
     }
-
-    const loginInfo = await formSerialize(request);
     try {
+      const loginInfo = await formSerialize(request);
       await loginRequest(loginInfo);
       const callbackURL = new URLSearchParams(new URL(request.url).search).get(
         "callbackURL"
       );
       queryClient.invalidateQueries({ queryKey: userKeys.all });
       location.replace(callbackURL ? callbackURL : "/");
-      return null;
+      return true;
     } catch (error) {
       if (error instanceof AxiosError) {
-        throw new Error(error.response?.data.message);
+        return error.response?.data;
+      } else {
+        return "Unknown error";
       }
     }
   };
 
 export const loader = (queryClient: QueryClient) => async (): Promise<any> => {
   try {
-    const user = await queryClient.ensureQueryData(getUserParams());
+    const user = await queryClient.ensureQueryData(getUserOption());
     if (user) {
       return redirect("/");
     }
@@ -46,11 +47,13 @@ export const loader = (queryClient: QueryClient) => async (): Promise<any> => {
 };
 
 const Login = () => {
-  const errors = useRouteError() as null | AxiosError<{ message: string }>;
+  const actionData = useActionData() as string | undefined;
+
+
 
   return (
     <>
-      <ErrorSection errors={errors} />
+      {actionData && <ErrorSection errors={actionData} />}
       <LoginForm />
     </>
   );

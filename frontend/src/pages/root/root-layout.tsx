@@ -2,7 +2,7 @@ import { Outlet, redirect } from "react-router-dom";
 import Navbar from "./components/navbar";
 import PageIndicator from "./components/page-indicator";
 import { QueryClient } from "@tanstack/react-query";
-import { getUserParams } from "../user/query/params";
+import { getUserOption } from "../user/query/options";
 import userKeys from "../user/query/queryKeyFactory";
 import { AxiosError } from "axios";
 
@@ -14,7 +14,7 @@ export const loader =
       return user;
     }
     try {
-      const userInfo = await queryClient.fetchQuery(getUserParams());
+      const userInfo = await queryClient.fetchQuery(getUserOption());
       return userInfo;
     } catch (error) {
       if (error instanceof AxiosError) {

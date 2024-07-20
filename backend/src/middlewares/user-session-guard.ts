@@ -10,11 +10,11 @@ export const userSessionGuard = (
   const cookies = req.cookies;
   const userSession = cookies["user-session"];
   if (!userSession) {
-    return res.status(403).json({ message: "Unauthorized" });
+    return res.status(403).json("Unauthorized");
   }
   const payload = verifyToken<LoginSignedToken>(userSession);
   if (!payload) {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json("Unauthorized");
   }
   req.context = { userId: payload.userId };
   next();

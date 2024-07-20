@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { sendVerifyEmailParams } from "@auth/query/params";
+import { sendVerifyEmailOption } from "@auth/query/options";
 import { AxiosError } from "axios";
 
 import { CardMainLayout } from "@user/layouts";
@@ -13,7 +13,7 @@ const SendVerifyEmail = () => {
   const { error, isError, isPending, isSuccess, mutate, reset } = useMutation<
     any,
     AxiosError<any, { message: string }>
-  >(sendVerifyEmailParams());
+  >(sendVerifyEmailOption());
 
   useEffect(() => {
     setStatusText(error?.response?.data.message);

@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/drawer";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
-import { getUserParams } from "@user/query/params";
+import { getUserOption } from "@user/query/options";
 import { UserInterface } from "@user/types";
 import { NavLink } from "react-router-dom";
 
@@ -33,7 +33,7 @@ const MobileNavLink: React.FC<MobileNavLinkProps> = ({
 };
 
 export function MobileDrawer() {
-  const { data: user } = useQuery<UserInterface>(getUserParams());
+  const { data: user } = useQuery<UserInterface>(getUserOption());
 
   return (
     <DrawerRoot>
