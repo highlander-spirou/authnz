@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from "express"
-import { verifyToken } from "../lib/hashes/jwt-token"
-import { LoginSignedToken } from "../routers/auth/types"
+import type { LoginSignedToken } from "@auth/types"
+import { verifyToken } from "@lib/hashes/jwt-token"
+import type { Request, Response, NextFunction } from "express"
 
 export const userSessionGuard = (
 	req: Request,

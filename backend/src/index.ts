@@ -1,15 +1,14 @@
 import express from "express"
-import http from "http"
+import http from "node:http"
 import bodyParser from "body-parser"
 import cors from "cors"
 import morgan from "morgan"
 import cookieParser from "cookie-parser"
-import dotenv from "dotenv"
 
-import authRouter from "./routers/auth/router"
-import userRouter from "./routers/user/router"
+import authRouter from "@auth/router"
+import userRouter from "@user/router"
+import { env } from "@lib/env"
 
-dotenv.config()
 
 const app = express()
 
@@ -30,7 +29,7 @@ app.use("/auth", authRouter)
 
 // Run the server
 const server = http.createServer(app)
-const PORT = Number(process.env.PORT ?? 8080)
+const PORT = Number(env.PORT ?? 8080)
 server.listen(PORT, () => {
 	console.log(`Server is running at http://localhost:${PORT}`)
 })

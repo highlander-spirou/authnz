@@ -1,6 +1,6 @@
 import { Router } from "express"
 import authController from "./auth.controllers"
-import { userSessionGuard } from "../../middlewares/user-session-guard"
+import { userSessionGuard } from "@middleware/user-session-guard"
 
 const authRouter = Router()
 

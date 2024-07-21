@@ -1,9 +1,9 @@
-import { comparePwd, hashPwd } from "../../lib/hashes/pwd-hash"
-import prisma from "../../lib/prisma"
-import { putEmailProps } from "./dto/putEmail.DTO"
-import { putInfoProps } from "./dto/putInfoDTO"
-import { putPasswordProps } from "./dto/putPassword.DTO"
+import prisma from "@lib/prisma"
 import { UserException, UserExceptionEnum } from "./user.exceptions"
+import type { putInfoProps } from "./dto/putInfoDTO"
+import type { putEmailProps } from "./dto/putEmail.DTO"
+import type { putPasswordProps } from "./dto/putPassword.DTO"
+import { comparePwd, hashPwd } from "@lib/hashes/pwd-hash"
 
 const service = {
 	getInfo: async (id: number) => {
@@ -32,6 +32,12 @@ const service = {
 		}
 		if (!existedUser.email_verified_at) {
 			throw new UserException(UserExceptionEnum.UserEmailNotVerifiedException)
+		}
+		const duplicatedUser = await prisma.user.findFirst({
+			where: { email: payload.email },
+		})
+		if(duplicatedUser) {
+			throw new UserException(UserExceptionEnum.DuplicatedUserEmailException)
 		}
 		await prisma.user.update({
 			where: { id: userId },

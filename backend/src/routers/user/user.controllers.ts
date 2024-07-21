@@ -1,7 +1,7 @@
 import type { Request, Response } from "express"
 import userService from "./users.service"
 import { putEmailDTO, putInfoDTO, putPasswordDTO } from "./dto"
-import HTTPHandler from "../../http-handler"
+import HTTPHandler from "@lib/http/http-handler"
 
 const userController = {
 	getInfo: async (req: Request, res: Response) => {

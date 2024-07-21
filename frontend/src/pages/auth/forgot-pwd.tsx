@@ -33,7 +33,8 @@ const ForgotPwd = () => {
 					and we will email you a password reset link that will allow you to
 					choose a new one.
 				</p>
-				<ErrorSection errors={errors.message} />
+				{errors && <ErrorSection errors={errors.message} />}
+				
 				<ForgotPwdForm />
 			</LoadingOpaque>
 		</>

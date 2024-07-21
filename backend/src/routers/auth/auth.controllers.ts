@@ -1,9 +1,9 @@
 import type { Request, Response } from "express"
-import authService from "./auth.service"
+import HTTPHandler from "@lib/http/http-handler"
 import { loginDTO, registerDTO, resetPwdDTO, sendResetPwdDTO } from "./dto"
-import HTTPHandler from "../../http-handler"
-import { sendVerifyEmail } from "../../lib/email/send-verify-email"
-import { sendResetPwd } from "../../lib/email/send-reset-pwd"
+import authService from "./auth.service"
+import { sendVerifyEmail } from "@lib/email/send-verify-email"
+import { sendResetPwd } from "@lib/email/send-reset-pwd"
 
 const authController = {
 	login: async (req: Request, res: Response) => {

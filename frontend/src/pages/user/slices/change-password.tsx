@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
 import { CardLayout, CardName, CardMainLayout, CardForm } from "@user/layouts"
 import { updatePasswordOption } from "@user/query/options"
+import { AxiosError } from "axios"
 import { useEffect, useState } from "react"
 import { useForm, UseFormReturn } from "react-hook-form"
 import { z } from "zod"
@@ -111,9 +112,15 @@ const ChangePassword = () => {
 		},
 	})
 
-	const { isError, isSuccess, isPending, status, reset, mutate } = useMutation(
-		updatePasswordOption()
-	)
+	const { isError, isSuccess, isPending, status, reset, mutate, error } =
+		useMutation<
+			any,
+			AxiosError<string, any>,
+			{
+				currentPassword: string
+				newPassword: string
+			}
+		>(updatePasswordOption())
 
 	const onSubmit = async (values: schemaType) => {
 		const submitValues = {
@@ -127,13 +134,13 @@ const ChangePassword = () => {
 
 	useEffect(() => {
 		if (status === "error") {
-			setStatusText("Error while updating your password!")
+			setStatusText(error!.response!.data)
 		} else if (status === "success") {
 			setStatusText("Password changed")
 		} else {
 			setStatusText("")
 		}
-	}, [status])
+	}, [status, error])
 
 	return (
 		<CardLayout>

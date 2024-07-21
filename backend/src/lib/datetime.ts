@@ -1,4 +1,4 @@
-import dayjs, { ManipulateType } from "dayjs"
+import dayjs, { type ManipulateType } from "dayjs"
 import utc from "dayjs/plugin/utc"
 import timezone from "dayjs/plugin/timezone"
 

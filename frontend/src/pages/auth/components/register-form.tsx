@@ -113,7 +113,6 @@ const RegisterForm = () => {
 									<FormControl>
 										<input
 											{...field}
-											type="password"
 											className="form-input-normal"
 										/>
 									</FormControl>

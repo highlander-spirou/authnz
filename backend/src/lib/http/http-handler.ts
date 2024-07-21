@@ -1,5 +1,5 @@
 import { ZodError } from "zod"
-import { HTTPErrorType, HTTPException } from "./errors"
+import { type HTTPErrorType, HTTPException } from "./errors"
 
 export const HTTPHandler = async <T>(
 	callbackFn: () => Promise<T>

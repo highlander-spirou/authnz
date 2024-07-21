@@ -1,6 +1,6 @@
 import { Router } from "express"
 import userController from "./user.controllers"
-import { userSessionGuard } from "../../middlewares/user-session-guard"
+import { userSessionGuard } from "@middleware/user-session-guard"
 
 const userRouter = Router()
 

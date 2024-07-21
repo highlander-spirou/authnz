@@ -1,11 +1,12 @@
-import dayjs from "dayjs"
-import { addTime } from "../../lib"
-import { signToken } from "../../lib/hashes/jwt-token"
-import { comparePwd, hashPwd } from "../../lib/hashes/pwd-hash"
-import { generateToken } from "../../lib/hashes/token-gen"
-import prisma from "../../lib/prisma"
-import { LoginSignedToken } from "./types"
+import prisma from "@lib/prisma"
 import { AuthException, AuthExceptionEnum } from "./auth.exceptions"
+import { comparePwd, hashPwd } from "@lib/hashes/pwd-hash"
+import { signToken } from "@lib/hashes/jwt-token"
+import type { LoginSignedToken } from "./types"
+import { generateToken } from "@lib/hashes/token-gen"
+import { addTime } from "@lib/datetime"
+import dayjs from "dayjs"
+
 
 const service = {
 	login: async (email: string, password: string) => {

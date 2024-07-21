@@ -11,6 +11,7 @@ import { useMutation } from "@tanstack/react-query"
 import { CardForm, CardMainLayout } from "@user/layouts"
 import { updateEmailOption } from "@user/query/options"
 import { UserInterface } from "@user/types"
+import { AxiosError } from "axios"
 import { useEffect, useState } from "react"
 import { useForm, UseFormReturn } from "react-hook-form"
 import { z } from "zod"
@@ -55,9 +56,9 @@ const UpdateEmailFormFields: React.FC<UpdateEmailFormFieldsProps> = ({
 
 const UpdateEmail = ({ user }: { user: UserInterface }) => {
 	const [statusText, setStatusText] = useState<string>("")
-	const { isError, isSuccess, isPending, status, reset, mutate } = useMutation(
-		updateEmailOption()
-	)
+
+	const { error, isError, isPending, isSuccess, mutate, reset, status } =
+		useMutation<any, AxiosError<string, any>, schemaType>(updateEmailOption())
 
 	const form = useForm<schemaType>({
 		resolver: zodResolver(schema),
@@ -72,13 +73,13 @@ const UpdateEmail = ({ user }: { user: UserInterface }) => {
 
 	useEffect(() => {
 		if (status === "error") {
-			setStatusText("Error while updating your email!")
+			setStatusText(error!.response!.data)
 		} else if (status === "success") {
 			setStatusText("Email changed")
 		} else {
 			setStatusText("")
 		}
-	}, [status])
+	}, [status, error])
 
 	return (
 		<>

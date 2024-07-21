@@ -1,25 +1,38 @@
 {
-  "compilerOptions": {
-    /* Language and Environment */
-    "target": "ES2020",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    /* Modules */
-    "module": "commonjs",
-    "resolveJsonModule": true,
-    /* Emit */
-    "outDir": "./build",
-    /* Interop Constraints */
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    /* Type Checking */
-    "strict": true,
-    /* Completeness */
-    "skipLibCheck": true,
-    "noImplicitAny": false,
-    "sourceMap": true,
-  },
-  "ts-node": {
-    "swc": true
-  }
+	"compilerOptions": {
+		// Enable latest features
+		"lib": ["ESNext", "DOM"],
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleDetection": "force",
+		"jsx": "react-jsx",
+		"allowJs": true,
+
+		// Bundler mode
+		"moduleResolution": "bundler",
+		"allowImportingTsExtensions": true,
+		"verbatimModuleSyntax": true,
+		"noEmit": true,
+
+		// Best practices
+		"strict": true,
+		"skipLibCheck": true,
+		"noFallthroughCasesInSwitch": true,
+
+		// Some stricter flags (disabled by default)
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
+		"noImplicitAny": false,
+		"noPropertyAccessFromIndexSignature": false,
+
+		// Path alias
+		"baseUrl": ".",
+		"paths": {
+			"@lib/*": ["./src/lib/*"],
+			"@auth/*": ["src/routers/auth/*"],
+			"@user/*": ["src/routers/user/*"],
+			"@middleware/*": ["src/routers/middleware/*"],
+			"@/*": ["./src/*"]
+		}
+	}
 }

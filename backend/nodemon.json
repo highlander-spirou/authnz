@@ -1,5 +1,5 @@
 {
     "watch": ["src"],
     "ext": ".ts, .js, .tsx, .jsx, .css, .html, .scss",
-    "exec": "ts-node --swc src/index.ts"
+    "exec": "bun run src/index.ts"
 }

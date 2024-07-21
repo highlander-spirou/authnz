@@ -1,4 +1,5 @@
-import { HTTPException } from "../../errors"
+import { HTTPException } from "@lib/http/errors"
+
 export enum AuthExceptionEnum {
 	// Login - Register errors
 	PasswordNotMatchException = 1,
