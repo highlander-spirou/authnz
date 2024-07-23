@@ -29,7 +29,7 @@ const LoginForm = () => {
 		},
 	})
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
-		submit(values, { method: "POST", action: "" })
+		submit({ formData: JSON.stringify(values) }, { method: "POST", action: "" })
 		form.resetField("password")
 	}
 	return (
@@ -67,37 +67,18 @@ const LoginForm = () => {
 								</FormItem>
 							)}
 						/>
-						<FormField
-							control={form.control}
-							name="remember"
-							render={({ field }) => (
-								<FormItem className="block mt-4">
-									<FormControl>
-										<label htmlFor="remember" className="flex items-center">
-											<input
-												type="checkbox"
-												id="remember"
-												name="remember"
-												className="w-4 h-4 text-indigo-500 bg-white border-gray-300 rounded focus:ring-1"
-											/>
-											<span className="ms-2 text-sm text-gray-600">
-												Remember Me
-											</span>
-										</label>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
+						<div className="flex justify-end items-center mt-5">
+							<Link
+								to="/forgot-password"
+								className="btn-link inline-flex justify-end"
+							>
+								Forgot password?
+							</Link>
+						</div>
 					</div>
-					<div className="auth-submit-section">
-						<Link to="/forgot-password" className="btn-link">
-							Forgot password?
-						</Link>
-						<button type="submit" className="btn-black ms-2">
-							Log in
-						</button>
-					</div>
+					<button type="submit" className="btn-black mt-5 w-full">
+						Log in
+					</button>
 				</Form>
 			</RHForm>
 		</>

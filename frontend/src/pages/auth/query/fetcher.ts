@@ -41,3 +41,8 @@ export const resetPassword = async (token: string, payload) => {
 	const response = await axiosClient.post("/reset-password/" + token, payload)
 	return response
 }
+
+export const logout = async () => {
+	const response = await axiosClient.get("/logout")
+	return response
+}

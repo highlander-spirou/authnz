@@ -7,19 +7,19 @@ const userController = {
 	getInfo: async (req: Request, res: Response) => {
 		const { data, error } = await HTTPHandler(async () => {
 			const { userId } = req.context
-			const userInfo = await userService.getInfo(userId)
+			const userInfo = await userService.getInfo(userId!)
 			return userInfo
 		})
 		if (error) {
 			return res.status(error.status).json(error.message)
 		}
-		return res.json(data)
+		return res.status(200).json(data)
 	},
 	changeInfo: async (req: Request, res: Response) => {
 		const { data, error } = await HTTPHandler(async () => {
 			const { userId } = req.context
 			const payload = await putInfoDTO.parseAsync(req.body)
-			await userService.changeProfile(userId, payload)
+			await userService.changeProfile(userId!, payload)
 		})
 		if (error) {
 			return res.status(error.status).json(error.message)
@@ -30,7 +30,7 @@ const userController = {
 		const { data, error } = await HTTPHandler(async () => {
 			const { userId } = req.context
 			const payload = await putEmailDTO.parseAsync(req.body)
-			await userService.changeEmail(userId, payload)
+			await userService.changeEmail(userId!, payload)
 		})
 		if (error) {
 			return res.status(error.status).json(error.message)
@@ -41,7 +41,7 @@ const userController = {
 		const { data, error } = await HTTPHandler(async () => {
 			const { userId } = req.context
 			const payload = await putPasswordDTO.parseAsync(req.body)
-			await userService.changePassword(userId, payload)
+			await userService.changePassword(userId!, payload)
 		})
 		if (error) {
 			return res.status(error.status).json(error.message)

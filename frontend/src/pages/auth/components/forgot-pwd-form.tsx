@@ -28,7 +28,7 @@ const ForgotPwdForm = () => {
 	})
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
-		submit(values, { method: "POST", action: "" })
+		submit({ formData: values }, { method: "POST", action: "" })
 	}
 
 	const [statusText, setStatusText] = useState<string>("")

@@ -72,7 +72,7 @@ const DropdownProfile = () => {
 								<DropDownLink label="API Token" link="" />
 								<DropDownLink
 									label="Logout"
-									link=""
+									link="/logout"
 									className="font-medium text-red-400 hover:text-red-500"
 								/>
 							</ul>

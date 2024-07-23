@@ -1,7 +1,8 @@
 import { RouteObject } from "react-router-dom"
+import queryClient from "@/query-client"
 import VerifyEmail, { action as verifyEmailAction } from "./verify-email"
 import ResetPassword, { action as resetPwdAction } from "./reset-password"
-import queryClient from "@/query-client"
+import Logout, { loader as logoutLoader } from "./logout"
 
 const router: RouteObject[] = [
 	{
@@ -14,6 +15,11 @@ const router: RouteObject[] = [
 		element: <ResetPassword />,
 		errorElement: <ResetPassword />,
 		action: resetPwdAction,
+	},
+	{
+		path: "/logout",
+		element: <Logout />,
+		loader: logoutLoader(queryClient),
 	},
 ]
 export default router

@@ -44,7 +44,7 @@ const RegisterForm = () => {
 			...(values.name && { name: values.name }),
 		}
 
-		submit(submitValue, { method: "POST", action: "" })
+		submit({ formData: submitValue }, { method: "POST", action: "" })
 		form.reset()
 	}
 	return (
@@ -106,29 +106,20 @@ const RegisterForm = () => {
 							name="name"
 							render={({ field }) => (
 								<FormItem className="mt-4">
-									<FormLabel className="input-label">Name</FormLabel>
-									<FormDescription className="text-xs italic">
-										Field is optional
-									</FormDescription>
+									<FormLabel className="input-label">
+										Name <span className="italic">(Optional)</span>
+									</FormLabel>
 									<FormControl>
-										<input
-											{...field}
-											className="form-input-normal"
-										/>
+										<input {...field} className="form-input-normal" />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
 							)}
 						/>
 					</div>
-					<div className="auth-submit-section">
-						<Link to="/login" className="btn-link">
-							Already registered?
-						</Link>
-						<button type="submit" className="btn-black ms-2">
-							Register
-						</button>
-					</div>
+					<button type="submit" className="btn-black mt-5 w-full">
+						Register
+					</button>
 				</Form>
 			</RHForm>
 		</>

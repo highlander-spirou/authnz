@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
+        titillium: ["Titillium Web", "sans-serif"],
       },
     },
   },

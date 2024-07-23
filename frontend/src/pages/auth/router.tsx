@@ -8,28 +8,28 @@ import ForgotPwd, { action as forgotPwdAction } from "./forgot-pwd"
 const router: RouteObject[] = [
 	{
 		path: "/login",
-		element: <AuthLayout />,
-		children: [
-			{
-				index: true,
-				element: <Login />,
-				loader: loginLoader(queryClient),
-				action: loginAction(queryClient),
-			},
-		],
+		element: <Login />,
+		loader: loginLoader(queryClient),
+		action: loginAction(queryClient),
 	},
 	{
 		path: "/register",
-		element: <AuthLayout />,
-		children: [
-			{
-				index: true,
-				element: <Register />,
-				errorElement: <Register />,
-				action: registerAction,
-			},
-		],
+		element: <Register />,
+		errorElement: <Register />,
+		action: registerAction,
 	},
+	// {
+	// 	path: "/register",
+	// 	element: <AuthLayout />,
+	// 	children: [
+	// 		{
+	// 			index: true,
+	// 			element: <Register />,
+	// 			errorElement: <Register />,
+	// 			action: registerAction,
+	// 		},
+	// 	],
+	// },
 	{
 		path: "/forgot-password",
 		element: <AuthLayout />,

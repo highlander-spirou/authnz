@@ -60,7 +60,10 @@ const ResetPassword = () => {
 	})
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
-		submit({ password: values.password }, { method: "POST", action: "" })
+		submit(
+			{ formData: { password: values.password } },
+			{ method: "POST", action: "" }
+		)
 	}
 
 	const error = useRouteError() as Error

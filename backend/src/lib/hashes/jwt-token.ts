@@ -2,9 +2,9 @@ import { env } from "@lib/env"
 import jwt from "jsonwebtoken"
 
 export const signToken = <T extends Record<string, any>>(payload: T) => {
-	const ttl = env.DEFAULT_TTL
+	const ttl = env.ACCESS_TOKEN_TTL_MINUTE
 	const token = jwt.sign(payload, env.JWT_SECRET_KEY, {
-		expiresIn: `${ttl}h`,
+		expiresIn: `${ttl}m`,
 	})
 	return token
 }

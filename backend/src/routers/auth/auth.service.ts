@@ -6,10 +6,11 @@ import type { LoginSignedToken } from "./types"
 import { generateToken } from "@lib/hashes/token-gen"
 import { addTime } from "@lib/datetime"
 import dayjs from "dayjs"
-
+import type { loginDTOProps } from "./dto/loginDTO"
+import redis from "@lib/redis"
 
 const service = {
-	login: async (email: string, password: string) => {
+	login: async ({ email, password }: loginDTOProps) => {
 		const existedEmail = await prisma.user.findFirst({
 			where: { email: email },
 			select: { password: true, id: true },
@@ -21,10 +22,13 @@ const service = {
 		if (!isPwdMatched) {
 			throw new AuthException(AuthExceptionEnum.PasswordNotMatchException)
 		}
-		const secureToken = signToken<LoginSignedToken>({
+
+		const accessToken = signToken<LoginSignedToken>({
 			userId: existedEmail.id,
 		})
-		return secureToken
+		const refreshToken = generateToken()
+		redis.set(refreshToken, "" + existedEmail.id)
+		return { accessToken, refreshToken }
 	},
 	register: async (email: string, password: string, username?: string) => {
 		const existedEmail = await prisma.user.findFirst({
