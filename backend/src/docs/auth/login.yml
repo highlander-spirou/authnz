@@ -1,0 +1,109 @@
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login user with basic authentication (email - password)
+      description: >
+        <b>This endpoint should only be called when the refresh-token (user session) has been invalidate (by `logout` or `expired`)</b><br>
+        <b>If refresh-token has not been invalidated, this endpoint will return immediately</b><br>
+        Authenticates a user with basic credentials (email and password).<br>
+        If authentication success, create and set the refresh-token as cookie for 30 days.<br>
+        Accept an optional browser-token cookie from the browser. <br>
+        • If the cookie exist, extends the user's browser activity. <br>
+        • If the cookie does not exist, register a new browser activity. <br>
+        Return an access-token as cookie within 5 minutes.<br>
+
+      operationId: auth.login
+      parameters:
+        - in: cookie
+          name: browser-token
+          schema:
+            type: string
+          description: Optional token to track the user's browser session.
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Successfully authenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "OKAY | Login session existed, this request does nothing"
+          headers:
+            Set-Cookie1:
+              description: Refresh token
+              schema:
+                type: string
+                example: refresh-token=some_cookie; Max-Age=2592000; Path=/; HttpOnly
+
+            Set-Cookie2:
+              description: Access token
+              schema:
+                type: string
+                example: access-token=jwt_token; Max-Age=300; Path=/; HttpOnly
+            
+            Set-Cookie3:
+              description: Browser token (Optional)
+              schema:
+                type: string
+                example: browser-token=jwt_token
+        '400':
+          description: Bad Request - Request body does not satisfy the schema
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Payload Error"
+        '404':
+          description: >
+            • "Email not found" <br>
+            • "Password not match" <br>
+            • "Unrecognized access" - Cause by browser token not match
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Email not found | Password not match | Unrecognized access"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "An unexpected error occurred. Please try again later."
+
+
+schemas:
+  LoginRequest:
+    type: object
+    properties:
+      email:
+        type: string
+        format: email
+        example: "m@m.co"
+      password:
+        type: string
+        format: password
+        example: "asdasdasd"
+    required:
+      - email
+      - password

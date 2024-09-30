@@ -1,0 +1,54 @@
+paths:
+  /team/change-member-role:
+    put:
+      tags:
+        - Team
+      summary: Change a member role
+      description: Change the member role to either `admin` or `member` 
+      operationId: team.change-member-role
+      parameters:
+        - in: cookie
+          name: access-token
+          schema:
+            type: string
+          required: true
+          description: JWT token used for admin identification.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/schemas/AddMemberRequest"
+      responses:
+        "201":
+          description: Member role changed successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Member role changed successfully."
+
+        "401":
+          description: Unauthorized - Invalid or missing token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token."
+
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "An unexpected error occurred. Please try again later."

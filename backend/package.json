@@ -1,10 +1,9 @@
 {
-  "name": "backend",
-  "module": "src/index.ts",
+  "name": "authnz-backend",
+  "module": "index.ts",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon"
+    "dev": "bunx nodemon"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
@@ -12,36 +11,41 @@
     "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/express-useragent": "^1.0.5",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/morgan": "^1.9.9",
     "@types/ms": "^0.7.34",
     "@types/nodemailer": "^6.4.15",
+    "@types/qrcode": "^1.5.5",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.6",
-    "@types/ua-parser-js": "^0.7.39",
+    "@types/yamljs": "^0.2.34",
     "nodemon": "^3.1.4",
-    "prisma": "^5.17.0"
+    "prisma": "^5.18.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@prisma/client": "^5.17.0",
-    "@t3-oss/env-core": "^0.10.1",
+    "@prisma/client": "5.18.0",
+    "@simplewebauthn/server": "^10.0.1",
+    "@t3-oss/env-core": "^0.11.1",
     "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "dayjs": "^1.11.12",
-    "dayjs-plugin-utc": "^0.1.2",
+    "dayjs": "^1.11.13",
     "express": "^4.19.2",
+    "express-useragent": "^1.0.15",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "ms": "^2.1.3",
-    "nodemailer": "^6.9.14",
-    "redis": "^4.6.15",
-    "swagger-jsdoc": "^6.2.8",
+    "nodemailer": "^6.9.15",
+    "otpauth": "^9.3.2",
+    "qrcode": "^1.5.4",
+    "redis": "^4.7.0",
     "swagger-ui-express": "^5.0.1",
-    "ua-parser-js": "^1.0.38",
+    "yamljs": "^0.3.0",
     "zod": "^3.23.8"
   }
 }

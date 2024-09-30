@@ -1,0 +1,71 @@
+paths:
+  /auth/logout:
+    get:
+      tags:
+        - Auth
+      summary: Logout this browser session
+      description: >
+        Invalidating the refresh token attaching to this browser token <br>
+        This action also removes the browser token from the database and cookie.
+      operationId: auth.logout
+      parameters:
+        - in: cookie
+          name: refresh-token
+          schema:
+            type: string
+          required: true
+          description: Refresh token for server-side invalidation.
+        - in: cookie
+          name: browser-token
+          schema:
+            type: string
+          required: true
+          description: Browser token for server-side invalidation.
+      responses:
+        "200":
+          description: Log out
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Log out"
+          headers:
+            Set-Cookie1:
+              description: Refresh token
+              schema:
+                type: string
+                example: refresh-token=""; Max-Age=0; Path=/; HttpOnly
+            Set-Cookie2:
+              description: Access token
+              schema:
+                type: string
+                example: access-token=""; Max-Age=0; Path=/; HttpOnly
+            Set-Cookie3:
+              description: Browser token
+              schema:
+                type: string
+                example: browser-token=""; Max-Age=0
+        "401":
+          description: Unauthorized - Invalid or missing token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Unrecognized access | Login session expired"
+
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "An unexpected error occurred. Please try again later."

@@ -1,103 +1,95 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-body {
-	@apply font-inter;
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 220.9 39.3% 11%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --ring: 224 71.4% 4.1%;
+  }
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 210 20% 98%;
+    --primary-foreground: 220.9 39.3% 11%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 216 12.2% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+  h1 {
+    @apply text-5xl font-extrabold leading-none tracking-tight mb-4;
+  }
+  h2 {
+    @apply text-4xl font-extrabold leading-none tracking-tight mb-4;
+  }
+  h3 {
+    @apply text-xl font-bold leading-none tracking-tight mb-4;
+  }
+}
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
 }
 
 @layer components {
-	.input-label {
-		@apply block text-sm font-medium text-gray-700;
-	}
-
-	.form-input-normal {
-		@apply form-input mt-1 w-full rounded-md shadow-sm border-gray-300;
-	}
-
-	.form-grid {
-		@apply grid grid-cols-6 gap-6;
-	}
-
-	.form-item {
-		@apply col-span-6 sm:col-span-4;
-	}
-
-	.btn-black {
-		@apply text-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150;
-	}
-
-	.btn-link {
-		@apply underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
-	}
-
-	.btn-dropdown {
-		@apply inline-flex items-center justify-center px-3 py-2 text-sm font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:ring-1 focus:ring-indigo-400 active:bg-gray-100 hover:bg-gray-100 transition ease-in-out duration-150;
-	}
-
-	.auth-submit-section {
-		@apply flex items-center justify-end mt-4 gap-3;
-	}
-
-	.dropdown-group-label {
-		@apply block px-4 py-2 text-xs text-gray-400;
-	}
-
-	.nav-bar {
-		@apply bg-white border-b border-gray-100;
-	}
-
-	/* This class use to restrict the navbar to span all the screen width
+  /* This class use to restrict the navbar to span all the screen width
 This is necessary for ultra-wide screen */
-	.nav-bar-restrict-grow {
-		@apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-	}
+  .restrict-navbar-grow {
+    @apply max-w-[1440px] mx-auto;
+  }
+  .restrict-content-grow {
+    @apply max-w-7xl mx-auto px-8;
+  }
+}
 
-	.nav-layout {
-		@apply flex justify-between h-16;
-	}
-
-	.nav-layout > .right-side {
-		@apply hidden sm:flex sm:items-center sm:ms-6;
-	}
-
-	.logo-wrapper {
-		@apply shrink-0 flex items-center;
-	}
-
-	.nav-links {
-		@apply hidden space-x-8 sm:-my-px sm:ms-10 sm:flex;
-	}
-
-	.nav-link {
-		@apply inline-flex items-center justify-center w-20 px-1 pt-1 text-sm text-gray-500 hover:text-gray-700 border-b-2 focus:outline-none focus:border focus:border-indigo-400 transition duration-150 ease-in-out;
-	}
-
-	.nav-link.active {
-		@apply border-indigo-400 hover:border-indigo-600 font-semibold;
-	}
-
-	.nav-link.inactive {
-		@apply border-b-transparent hover:border-b-gray-300 font-normal;
-	}
-
-	.nav-link-mobile {
-		@apply block w-full ps-3 pe-4 py-2 border-l-4 text-start text-base font-medium focus:outline-none transition duration-150 ease-in-out text-gray-600 hover:text-gray-800 border-transparent hover:border-gray-300 hover:bg-gray-50 focus:text-gray-800 focus:bg-gray-50;
-	}
-
-	.nav-link-mobile.active {
-		@apply text-indigo-700 bg-indigo-50 border-indigo-400 focus:border-indigo-700 focus:text-indigo-800 focus:bg-indigo-100;
-	}
-
-	.user-submit-section {
-		@apply flex flex-row-reverse items-center justify-between mt-5;
-	}
-
-	.user-status-success {
-		@apply ml-1 font-medium text-sm text-green-600;
-	}
-
-	.user-status-error {
-		@apply ml-1 font-medium text-sm text-red-600;
-	}
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

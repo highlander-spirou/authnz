@@ -1,0 +1,9 @@
+tags:
+  - name: Auth
+    description: Endpoints related to authentication
+  - name: User
+    description: Endpoints related to user information
+  - name: Record
+    description: Endpoints related to records - subject of authorization
+  - name: Team
+    description: Endpoints related to team functionalities

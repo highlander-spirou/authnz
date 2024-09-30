@@ -1,0 +1,62 @@
+paths:
+  /records/get-records:
+    get:
+      tags:
+        - Record
+      summary: Return all the records
+      description: Return all the records from the database, based on the user's API token
+      operationId: records.get-records
+      parameters:
+        - in: cookie
+          name: access-token
+          schema:
+            type: string
+          required: true
+          description: JWT token used for user identification.
+      responses:
+        "200":
+          description: Array of records.
+          content:
+            application/json:
+              type: array
+              items:
+                $ref: "#components/schemas/RecordResponse"
+              example:
+                - id: "12345"
+                  name: "Record One"
+                - id: "67890"
+                  name: "Record Two"
+
+        "401":
+          description: Unauthorized - Invalid or missing token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token."
+
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "An unexpected error occurred. Please try again later."
+
+schemas:
+  RecordResponse:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    required:
+      - id
+      - name

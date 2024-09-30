@@ -1,11 +1,17 @@
 {
   "files": [],
   "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@pages/*": ["./src/pages/*"],
+      "@auth/*": ["./src/modules/auth/*"],
+      "@mfa/*": ["./src/modules/mfa/*"],
+      "@user/*": ["./src/modules/user/*"],
+      "@/*": ["./src/*"],
     }
-  ]
+  }
 }

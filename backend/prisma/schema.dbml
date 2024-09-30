@@ -1,0 +1,61 @@
+enum RoleEnum {
+  ADMIN
+  EDITOR
+  USER
+}
+
+enum TierEnum {
+  ADMIN
+  USER
+}
+
+table UserBasicCred {
+  id integer [primary key]
+  email varchar unique
+  password varchar
+}
+
+table UserInfo {
+  id integer [primary key]
+  name varchar [default: null]
+  activated datetime [default: null]
+  tier TierEnum
+}
+
+table LoginSession {
+  id integer [primary key]
+  refresh_token varchar
+  user_id integer
+  browser_info varchar
+  geolocation varchar
+  latest_activity datetime [default: `now()`]
+  expired datetime
+}
+
+table Team {
+  id integer [primary key]
+  name varchar
+  owner_id int
+}
+
+table TeamMember {
+  user_id int [ref: > UserBasicCred.id]
+  team_id int [ref: > Team.id]
+  role RoleEnum
+
+  indexes {
+    (user_id, team_id) [pk]
+  }
+}
+
+table Otp {
+  id  integer [primary key]
+  userId int [unique]
+  otp_enabled bool [default: false]
+  otp_base32  varchar [default: null]
+}
+
+Ref: UserBasicCred.id - UserInfo.id
+Ref: UserBasicCred.id - Otp.userId
+Ref: UserBasicCred.id < LoginSession.user_id
+Ref: UserBasicCred.id < Team.owner_id

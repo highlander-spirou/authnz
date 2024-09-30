@@ -1,0 +1,55 @@
+paths:
+  /auth/register-user/{token}:
+    post:
+      summary: Create an account from magic link invitation
+      description: Activate the user account - whom has been redirecting from a magic link for email verification, allow them to set up initial password.
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/schemas/RegisterPassword"
+      responses:
+        200:
+          description: Password registered successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Password registered successfully."
+        400:
+          description: Bad Request - Invalid password format.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid token or password."
+        500:
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "An unexpected error occurred."
+
+schemas:
+  RegisterPassword:
+    type: object
+    properties:
+      password:
+        type: string
+        format: password
+        example: "asdasdasd"
+    required:
+      - password

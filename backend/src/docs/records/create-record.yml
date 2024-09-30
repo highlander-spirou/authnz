@@ -1,0 +1,61 @@
+paths:
+  /records/create-record:
+    post:
+      tags:
+        - Record
+      summary: Create a new record
+      description: Check a user's permission, if available create a new record
+      operationId: records.create-record
+      parameters:
+        - in: cookie
+          name: access-token
+          schema:
+            type: string
+          required: true
+          description: JWT token used for user identification.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/schemas/CreateRecordRequest"
+      responses:
+        "201":
+          description: Create new record successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Create new record successfully."
+
+        "401":
+          description: Unauthorized - Invalid or missing token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token."
+
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "An unexpected error occurred. Please try again later."
+
+schemas:
+  CreateRecordRequest:
+    type: object
+    properties:
+      name:
+        type: string

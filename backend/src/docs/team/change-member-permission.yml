@@ -1,0 +1,74 @@
+paths:
+  /team/change-member-permission:
+    put:
+      tags:
+        - Team
+      summary: Add or Change a member permission
+      description: Add or Change the member permission to CRUD 
+      operationId: team.change-member-permission
+      parameters:
+        - in: cookie
+          name: access-token
+          schema:
+            type: string
+          required: true
+          description: JWT token used for admin identification.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/schemas/ChangeMemberPermissionRequest"
+      responses:
+        "201":
+          description: Member's permission changed successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Member's permission changed successfully."
+
+        "401":
+          description: Unauthorized - Invalid or missing token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token."
+
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "An unexpected error occurred. Please try again later."
+
+
+schemas:
+  ChangeMemberPermissionRequest:
+    type: object
+    properties:
+      id:
+        type: string
+      permissions:
+        type: array
+        items:
+          type: string
+          enum: 
+            - read
+            - create
+            - update
+            - delete
+          example:
+            - read
+            - update

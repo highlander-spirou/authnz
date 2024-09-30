@@ -1,0 +1,66 @@
+paths:
+  /auth/signup/{id}:
+    post:
+      tags:
+        - Auth
+      summary: Create an admin account
+      description: Create an admin account with email and password. Admin is able to create & manage team. This resource need an random Id for extra security 
+      operationId: auth.signup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/schemas/SignUpRequest"
+      responses:
+        "201":
+          description: Admin registered successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Admin registered successfully."
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Email has been registered | Payload Error"
+
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "An unexpected error occurred. Please try again later."
+
+
+schemas: 
+  SignUpRequest:
+    type: object
+    properties:
+      email:
+        type: string
+        format: email
+        example: "a@a.co"
+      password:
+        type: string
+        format: password
+        example: "zxczxczxc"
+      name:
+        type: string
+    required:
+      - email
+      - password

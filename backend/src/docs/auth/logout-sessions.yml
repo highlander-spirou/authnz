@@ -1,0 +1,47 @@
+paths:
+  /auth/logout-sessions:
+    get:
+      tags:
+        - Auth
+      summary: Invalidates all the refresh tokens, except current browser
+      description: >
+        Invalidate all the refresh tokens, except the current browser. <br>
+        This method cannot directly send invalidate cookie to all the browsers, so the effect will work when the access-token of the browser expired
+      operationId: auth.logout-sessions
+      parameters:
+        - in: cookie
+          name: browser-token
+          schema:
+            type: string
+          required: true
+          description: Browser token for current browser identification..
+      responses:
+        "200":
+          description: Lougout!
+          headers:
+            Set-Cookie1:
+              description: Refresh token
+              schema:
+                type: string
+                example: refresh-token=some_cookie; Max-Age=0; Path=/; HttpOnly
+        "401":
+          description: Unauthorized - Invalid or missing token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token."
+
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "An unexpected error occurred. Please try again later."

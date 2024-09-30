@@ -1,0 +1,64 @@
+paths:
+  /team/create-team:
+    post:
+      tags:
+        - Team
+      summary: Create a new team
+      description: Create a new team (only prviledged-role is able to perform the action)
+      operationId: team.create-team
+      parameters:
+        - in: cookie
+          name: access-token
+          schema:
+            type: string
+          required: true
+          description: JWT token used for admin identification.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/schemas/CreateTeamRequest"
+      responses:
+        "201":
+          description: New team created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "New team created successfully."
+
+        "401":
+          description: Unauthorized - Invalid or missing token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token."
+
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "An unexpected error occurred. Please try again later."
+
+
+schemas: 
+  CreateTeamRequest:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+        - name

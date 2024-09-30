@@ -9,9 +9,9 @@ services:
     volumes:
       - ./data:/var/lib/mysql
 
-  redis:
-    image: bitnami/redis
-    ports:
-      - "6379:6379"
-    environment:
-      - REDIS_PASSWORD=example
+  # redis:
+  #   image: bitnami/redis
+  #   ports:
+  #     - "6379:6379"
+  #   environment:
+  #     - REDIS_PASSWORD=example

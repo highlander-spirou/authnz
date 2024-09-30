@@ -1,9 +1,9 @@
 import { ZodError } from "zod"
-import { type HTTPErrorType, HTTPException } from "./errors"
+import { HTTPException, type HTTPErrorType } from "./errors"
 
 export const HTTPHandler = async <T>(
   callbackFn: () => Promise<T>
-): Promise<{ data: T | null; error: HTTPErrorType | null }> => {
+): Promise<{ data: T; error: null } | { data: null; error: HTTPErrorType }> => {
   try {
     const data = await callbackFn()
     return { data, error: null }

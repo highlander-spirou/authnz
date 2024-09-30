@@ -1,0 +1,65 @@
+paths:
+  /team/delete-member:
+    delete:
+      tags:
+        - Team
+      summary: Delete a member (by email) to from team
+      description: Delete a member from a team
+      operationId: team.delete-member
+      parameters:
+        - in: cookie
+          name: access-token
+          schema:
+            type: string
+          required: true
+          description: JWT token used for admin identification.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/schemas/AddMemberRequest"
+      responses:
+        "200":
+          description: Member removed successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Member removed successfully."
+
+        "401":
+          description: Unauthorized - Invalid or missing token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token."
+
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "An unexpected error occurred. Please try again later."
+
+
+schemas: 
+  DeleteRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+        - email

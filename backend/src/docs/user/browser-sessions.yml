@@ -1,0 +1,70 @@
+paths:
+  /user/device-sessions:
+    get:
+      tags:
+        - User
+      summary: Return device activities
+      description: Whenever the `access token` gets reset, we will update the activity of the device (based on refresh token).
+      operationId: user.device-sessions
+      parameters:
+        - in: cookie
+          name: access-token
+          schema:
+            type: string
+          required: true
+          description: JWT token used for email verification.
+        - in: cookie
+          name: browser-token
+          schema:
+            type: string
+          required: true
+          description: Browser token for browser activities.
+      responses:
+        "200":
+          description: Array of browser activities.
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/BrowserSessionsResponse"
+
+        "401":
+          description: Unauthorized - Invalid or missing token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token."
+
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "An unexpected error occurred. Please try again later."
+
+
+schemas:
+  BrowserSessionsResponse:
+    type: object
+    properties:
+      type:
+        type: string
+        enum:
+          - windows
+          - android
+          - ios
+        description: The type of device or operating system.
+      lastActivity:
+        type: string
+        description: The timestamp of the last activity in ISO 8601 format.
+        example: "2024-08-30T12:34:56Z"
+    required:
+      - type
+      - lastActivity

@@ -1,16 +1,17 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import { resolve } from "path";
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react-swc"
+import path from "path"
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@": resolve(__dirname, "./src"),
-      "@user": resolve(__dirname, "./src/pages/user"),
-      "@root": resolve(__dirname, "./src/pages/root"),
-      "@auth": resolve(__dirname, "./src/pages/auth"),
+      "@pages": path.resolve(__dirname, "./src/pages"),
+      "@auth": path.resolve(__dirname, "./src/modules/auth"),
+      "@mfa": path.resolve(__dirname, "./src/modules/mfa"),
+      "@user": path.resolve(__dirname, "./src/modules/user"),
+      "@": path.resolve(__dirname, "./src"),
     },
   },
-});
+})

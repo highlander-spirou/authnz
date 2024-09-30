@@ -1,0 +1,48 @@
+paths:
+  /user/change-device-location:
+    put:
+      tags:
+        - User
+      summary: Change the location of the device based on refresh token
+      description: Change the location of the device based on refresh token, based on the location fetched by OpenStreetMap API
+      operationId: user.change-device-location
+      parameters:
+        - in: cookie
+          name: refresh-token
+          schema:
+            type: string
+          required: true
+          description: Refresh token for device recognition.
+      responses:
+        "200":
+          description: Update device location successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Update device location successfully."
+
+        "401":
+          description: Unauthorized - Invalid or missing token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token."
+
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "An unexpected error occurred. Please try again later."

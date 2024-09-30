@@ -1,0 +1,64 @@
+paths:
+  /user/info:
+    get:
+      tags:
+        - User
+      summary: Return the info of the user
+      operationId: user.get-info
+      parameters:
+        - in: cookie
+          name: access-token
+          schema:
+            type: string
+          required: true
+          description: JWT token used for email verification.
+        - in: cookie
+          name: browser-token
+          schema:
+            type: string
+          required: true
+          description: Browser token for browser activities.
+        - in: cookie
+          name: refresh-token
+          schema:
+            type: string
+          required: true
+          description: Refresh token for browser activities.
+      responses:
+        "200":
+          description: Object of user information.
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/UserInfoResponse"
+
+        "401":
+          description: Unauthorized - Invalid or missing token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token."
+
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "An unexpected error occurred. Please try again later."
+
+
+schemas:
+  UserInfoResponse:
+    type: object
+    properties:
+      name:
+        type: string
+        example: "User 1"

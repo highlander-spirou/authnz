@@ -1,0 +1,60 @@
+paths:
+  /user/device-info:
+    get:
+      tags:
+        - User
+      summary: Return device info of the current refresh-token
+      operationId: user.device-info
+      parameters:
+        - in: cookie
+          name: Refresh-token
+          schema:
+            type: string
+          required: true
+          description: Refresh token for device recognition.
+      responses:
+        "200":
+          description: Information (location and device type) of the device.
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/DeviceInfoResponse"
+
+        "401":
+          description: Unauthorized - Invalid or missing token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid or missing token."
+
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "An unexpected error occurred. Please try again later."
+
+schemas:
+  DeviceInfoResponse:
+    type: object
+    properties:
+      location:
+        type: string
+        nullable: true
+      deviceType:
+        type: object
+        properties:
+          deviceType:
+            type: string
+          operatingSystem:
+            type: string
+          browserType:
+            type: string
