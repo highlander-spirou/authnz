@@ -31,6 +31,7 @@
 			"@lib/*": ["./src/lib/*"],
 			"@auth/*": ["src/routers/auth/*"],
 			"@user/*": ["src/routers/user/*"],
+			"@mfa/*": ["src/routers/mfa/*"],
 			"@middleware/*": ["src/routers/middleware/*"],
 			"@/*": ["./src/*"]
 		}

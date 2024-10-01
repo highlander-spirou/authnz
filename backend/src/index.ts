@@ -10,9 +10,9 @@ import useragent from 'express-useragent'
 
 import authRouter from "@auth/index"
 import userRouter from "@user/index"
+import mfaRouter from "@mfa/index"
 import swaggerDocument from "./docs"
 import { secureTeamRouter } from "./routers/team"
-import mfaRouter from "./routers/mfa"
 
 const app = express()
 
@@ -37,8 +37,8 @@ app.use(
 
 app.use("/auth", authRouter)
 app.use("/user", userRouter)
-app.use("/team", secureTeamRouter)
 app.use("/mfa", mfaRouter)
+app.use("/team", secureTeamRouter)
 
 app.use('/api-docs', swaggerui.serve, swaggerui.setup(swaggerDocument));
 
