@@ -13,7 +13,7 @@ import {
   ScanFaceIcon,
 } from "lucide-react"
 import useLocalStorage from "@/lib/hooks/useLocalStorage"
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
 import {
   getBiometricAuthOptOption,
   verifyBiometricAuthOption,
@@ -84,7 +84,6 @@ const BiometricMenu = ({ toggleOpen, onVerifiedSuccessHandler }: MenuProps) => {
     mutate: fetchChallenge,
     isPending,
   } = useMutation({
-    mutationKey: getBiometricAuthOptOption.key,
     mutationFn: getBiometricAuthOptOption.fn,
     retry: false,
     onError: () => {
@@ -92,16 +91,11 @@ const BiometricMenu = ({ toggleOpen, onVerifiedSuccessHandler }: MenuProps) => {
     },
   })
 
-  useEffect(() => {
-     console.log('challenge', challenge)
-  }, [challenge])
-
   const { data: biometricVerifyResult, mutateAsync } = useMutation<
     MfaVerification,
     any,
     { payload: any }
   >({
-    mutationKey: verifyBiometricAuthOption.key,
     mutationFn: verifyBiometricAuthOption.fn,
     retry: false,
     onSuccess: (result) => {
@@ -199,7 +193,6 @@ const OTPMenu = ({ toggleOpen, onVerifiedSuccessHandler }: MenuProps) => {
   const { setMfaToken } = useGlobalContext()
 
   const { mutateAsync, isPending } = useMutation({
-    mutationKey: verifyOTPOption.key,
     mutationFn: verifyOTPOption.fn,
     retry: false,
     onSuccess: (result) => {

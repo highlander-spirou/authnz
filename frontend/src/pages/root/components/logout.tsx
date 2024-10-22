@@ -8,7 +8,6 @@ import { logoutOptions } from "@auth/queries/options"
 
 const LogoutMenuItem = () => {
   const { mutate: logout } = useMutation({
-    mutationKey: logoutOptions.key,
     mutationFn: logoutOptions.fn,
     onSuccess: () => {
       logoutOptions.invalidates()

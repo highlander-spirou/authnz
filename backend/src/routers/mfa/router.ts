@@ -14,7 +14,7 @@ mfaRouter.delete("/otp/disable", MfaController.disableTOTP)
 // #endregion
 
 // #region biometrics
-mfaRouter.get("/biometrics/status", MfaController.getBiometricStatus)
+mfaRouter.get("/biometrics/status", MfaController.biometricStatus)
 mfaRouter.get("/biometrics/register-option", MfaController.createRegisterOption)
 mfaRouter.delete("/biometrics/cancel-challenge", MfaController.cancelChallenge)
 mfaRouter.post("/biometrics/verify-reg-device", MfaController.verifyRegDevice)

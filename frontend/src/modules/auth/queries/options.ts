@@ -17,7 +17,6 @@ export const logoutSessionOptions = {
 }
 
 export const logoutOptions = {
-  key: userKeys.info,
   fn: logoutRequest,
   invalidates: () => {
     queryClient.invalidateQueries({ queryKey: userKeys.info })

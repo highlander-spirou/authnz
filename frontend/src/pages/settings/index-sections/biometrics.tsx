@@ -33,7 +33,7 @@ const BiometricsSection = () => {
               You have enabled biometric for this device.
             </h4>
             <div className="w-full flex justify-end mt-5">
-              <Link to="/settings/mfa-biometric">
+              <Link to="/settings/biometric">
                 <Button variant="destructive">Disable Biometric</Button>
               </Link>
             </div>
@@ -61,7 +61,7 @@ const BiometricsSection = () => {
                   to secure your account
                 </p>
                 <div className="mt-5 w-full flex justify-end">
-                  <Link to="/settings/mfa-biometric">
+                  <Link to="/settings/biometric">
                     <Button>Register Biometrics</Button>
                   </Link>
                 </div>

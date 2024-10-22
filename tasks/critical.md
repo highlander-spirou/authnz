@@ -1,0 +1,1 @@
+<!-- CRITICAL: add resource list all the biometrics based on session -->

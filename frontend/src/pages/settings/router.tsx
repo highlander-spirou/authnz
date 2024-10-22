@@ -4,9 +4,10 @@ import DeviceLocation, {
   action as deviceLocationAction,
 } from "./device-location"
 import queryClient from "@/query-client"
-import MFA_OTP from "./mfa-otp"
-import MFA_Biometrics from "./mfa-biometric"
-import Error from "../../error"
+import RegisterOrDisableOTP from "./otp"
+import RegisterOrDisableBiometric from "./biometrics"
+
+
 
 const settingsRouter: RouteObject = {
   path: "settings",
@@ -18,12 +19,12 @@ const settingsRouter: RouteObject = {
       action: deviceLocationAction(queryClient),
     },
     {
-      path: "mfa-otp",
-      element: <MFA_OTP />,
+      path: "otp",
+      element: <RegisterOrDisableOTP />,
     },
     {
-      path: "mfa-biometric",
-      element: <MFA_Biometrics />,
+      path: "biometric",
+      element: <RegisterOrDisableBiometric />,
     },
   ],
 }

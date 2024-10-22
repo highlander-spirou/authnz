@@ -13,8 +13,8 @@ import { CircleCheckBigIcon } from "lucide-react"
 import queryClient from "@/query-client"
 
 type BiometricErrors = "BiometricCancelled" | "ChallengeConflicted"
-
-const MFA_Biometrics = () => {
+/* 
+const RegisterBiometric = () => {
   const { data: biometricStatus } = useQuery({
     queryKey: getBiometricStatusOption.key,
     queryFn: getBiometricStatusOption.fn,
@@ -59,7 +59,6 @@ const MFA_Biometrics = () => {
     null
   )
   const { mutateAsync } = useMutation({
-    mutationKey: verifyRegDeviceOption.key,
     mutationFn: verifyRegDeviceOption.fn,
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -125,6 +124,17 @@ const MFA_Biometrics = () => {
       </div>
     </>
   )
+} */
+
+const RegisterOrDisableBiometric = () => {
+
+  
+
+  return (
+    <>
+      <div>asfhasjkhf</div>
+    </>
+  )
 }
 
-export default MFA_Biometrics
+export default RegisterOrDisableBiometric

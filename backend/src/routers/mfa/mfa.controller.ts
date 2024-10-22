@@ -64,15 +64,15 @@ const MfaController = {
   },
   // #endregion
   // #region biometrics
-  getBiometricStatus: async (req: Request, res: Response) => {
+  biometricStatus: async (req: Request, res: Response) => {
     const { data, error } = await HTTPHandler(async () => {
-      return await BiometricServices.getBiometricStatus(req)
+      return await BiometricServices.biometricStatus(req)
     })
 
     if (error) {
       return res.status(error.status).json({ message: error.message })
     }
-    return res.status(200).json({ status: data })
+    return throttleResponse({ res, status: 200, payload: data })
   },
   createRegisterOption: async (req: Request, res: Response) => {
     const { data, error } = await HTTPHandler(async () => {

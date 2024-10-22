@@ -142,7 +142,7 @@ const RegisterOTP = () => {
   )
 }
 
-const MFA_OTP = () => {
+const RegisterOrDisableOTP = () => {
   const { data: otpStatus } = useQuery<OTPStatus>({
     queryKey: getOTPStatusOptions.key,
     queryFn: getOTPStatusOptions.fn,
@@ -156,4 +156,4 @@ const MFA_OTP = () => {
   return <RegisterOTP />
 }
 
-export default MFA_OTP
+export default RegisterOrDisableOTP

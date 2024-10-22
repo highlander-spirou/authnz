@@ -11,13 +11,12 @@ export const getOTPStatusOptions = {
 }
 
 export const generateOTPOptions = {
-  key: mfaKeys.otp.OTPData,
+  key: mfaKeys.otp.qrCode,
   fn: Fetcher.generateOTPRequest,
   staleTime: env.REACT_ROUTER_STALE_TIME,
 }
 
 export const registerOTPOption = {
-  key: mfaKeys.otp.status,
   fn: Fetcher.registerOTPRequest,
   invalidates: () => {
     queryClient.invalidateQueries({ queryKey: mfaKeys.otp.status })
@@ -25,7 +24,6 @@ export const registerOTPOption = {
 }
 
 export const verifyOTPOption = {
-  key: mfaKeys.otp.status,
   fn: Fetcher.verifyOTPRequest,
   invalidates: () => {
     queryClient.invalidateQueries({ queryKey: mfaKeys.mfaVerifyStatus })
@@ -42,7 +40,7 @@ export const deleteOTPOption = {
 
 // #region Biometrics
 export const getBiometricStatusOption = {
-  key: mfaKeys.biometric.biometricStatus,
+  key: mfaKeys.biometric.status,
   fn: Fetcher.getBiometricStatusRequest,
   staleTime: env.REACT_ROUTER_STALE_TIME,
 }
@@ -60,17 +58,14 @@ export const cancelChallengeOption = {
 }
 
 export const verifyRegDeviceOption = {
-  key: mfaKeys.biometric.biometricVerifyDeviceData,
   fn: Fetcher.verifyReqDeviceRequest,
 }
 
 export const getBiometricAuthOptOption = {
-  key: mfaKeys.biometric.biometricAuthOption,
   fn: Fetcher.getBiometricAuthOptionRequest,
 }
 
 export const verifyBiometricAuthOption = {
-  key: mfaKeys.biometric.biometricVerifyAuth,
   fn: Fetcher.verifyBiometricAuthRequest,
   invalidates: () => {
     queryClient.invalidateQueries({ queryKey: mfaKeys.mfaVerifyStatus })

@@ -12,10 +12,10 @@ import {
 } from "@simplewebauthn/server"
 import type { Request } from "express"
 
-export const getBiometricStatus = async (req: Request) => {
+export const biometricStatus = async (req: Request) => {
   const userId = req.context.userId!
   const sessionId = req.context.sessionId!
-  const data = await prisma.biometric.count({
+  /* const data = await prisma.biometric.count({
     where: {
       AND: [
         { user_id: userId },
@@ -27,8 +27,12 @@ export const getBiometricStatus = async (req: Request) => {
         },
       ],
     },
+  }) */
+  const data = await prisma.biometric.findFirst({
+    where: { user_id: userId },
   })
-  return data > 0
+
+  return data
 }
 
 export const createRegisterOption = async (req: Request) => {
