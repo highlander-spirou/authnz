@@ -1,5 +1,5 @@
 import prisma from "@lib/prisma"
-import { changeBrowserLocationDTO } from "@user/DTO"
+import { changeBrowserLocationDTO } from "@user/user.dto"
 import type { Request } from "express"
 
 export const updateDeviceLocation = async (req: Request) => {

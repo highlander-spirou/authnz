@@ -33,8 +33,7 @@ const PasswordSection = () => {
   const [passwordConfirm, setPasswordConfirm] = useState("")
 
   const { mutateAsync } = useMutation({
-    mutationFn: () =>
-      changePasswordOptions.fn({ oldPassword: currentPassword, newPassword }),
+    mutationFn: changePasswordOptions.fn,
     onError: (error: AxiosError<{ message: string }>) => {
       setError(error.response?.data.message!)
     },
@@ -52,7 +51,7 @@ const PasswordSection = () => {
 
     try {
       await schema.parseAsync({ currentPassword, newPassword, passwordConfirm })
-      await mutateAsync()
+      await mutateAsync({ oldPassword: currentPassword, newPassword })
       resetForm()
       toast.success("Change password successfully", { duration: 2000 })
     } catch (error) {

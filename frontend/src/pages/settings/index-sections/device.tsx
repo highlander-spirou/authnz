@@ -44,7 +44,9 @@ const DeviceSessionsSection = () => {
 
   const { mutateAsync } = useMutation({
     mutationFn: logoutSessionOptions.fn,
-    onSuccess: logoutSessionOptions.onSuccessHandler,
+    onSuccess: () => {
+      logoutSessionOptions.invalidates()
+    },
   })
 
   const deleteHandler = async () => {

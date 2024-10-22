@@ -36,9 +36,9 @@ const OTPSection = () => {
               verify.
             </p>
             <div className="w-full flex justify-end mt-5">
-              <Button variant="destructive">
-                <Link to="/settings/mfa-otp">Disable OTP</Link>
-              </Button>
+              <Link to="/settings/mfa-otp">
+                <Button variant="destructive">Disable OTP</Button>
+              </Link>
             </div>
           </>
         ) : (
@@ -57,9 +57,9 @@ const OTPSection = () => {
               enter the 6-digit code from the authentication app.
             </p>
             <div className="mt-5 w-full flex justify-end">
-              <Button>
-                <Link to="/settings/mfa-otp">Activate OTP</Link>
-              </Button>
+              <Link to="/settings/mfa-otp">
+                <Button>Activate OTP</Button>
+              </Link>
             </div>
           </>
         )}

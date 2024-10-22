@@ -1,6 +1,6 @@
 import type { Request } from "express"
 import { AuthException, AuthExceptionEnum } from "@auth/auth.exceptions"
-import { inviteUserDTO, registerAdminDTO, registerUserDTO } from "@auth/DTO"
+import { inviteUserDTO, registerAdminDTO, registerUserDTO } from "@auth/auth.dto"
 import { hashPwd } from "@lib/hash/pwd-hash"
 import prisma from "@lib/prisma"
 import { signToken, verifyToken } from "@lib/hash/jwt-token"

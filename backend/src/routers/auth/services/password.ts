@@ -1,5 +1,5 @@
 import { AuthException, AuthExceptionEnum } from "@auth/auth.exceptions"
-import { changePasswordDTO, forgotPasswordDTO, resetPwdDTO } from "@auth/DTO"
+import { changePasswordDTO, forgotPasswordDTO, resetPwdDTO } from "@auth/auth.dto"
 import type { ForgotPasswordPayload } from "@auth/types"
 import { sendForgotPwd } from "@lib/email/send-forgot-pwd"
 import env from "@lib/env"

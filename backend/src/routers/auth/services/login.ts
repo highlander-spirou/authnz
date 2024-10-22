@@ -2,14 +2,13 @@ import type { Request, Response } from "express"
 import prisma from "@lib/prisma"
 import { comparePwd } from "@lib/hash/pwd-hash"
 import { generateRandomToken } from "@lib/hash/gen-token"
-import redis from "@lib/redis"
 import env from "@lib/env"
 import {
   invalidateToken,
   setAccessToken,
   setRefreshToken,
 } from "@lib/http/set-cookie"
-import { loginDTO } from "@auth/DTO"
+import { loginDTO } from "@auth/auth.dto"
 import { AuthException, AuthExceptionEnum } from "@auth/auth.exceptions"
 import { getBrowserInfo } from "@lib/http/browser-info"
 import ms from "ms"
@@ -51,20 +50,21 @@ export const login = async (req: Request, res: Response) => {
 
   /* Create Refresh token */
   const newRefreshToken = generateRandomToken()
-  await prisma.loginSession.create({
+  const { id: sessionId } = await prisma.loginSession.create({
     data: {
       refresh_token: newRefreshToken,
       user_id: existedEmail.id,
       browser_info: getBrowserInfo(req),
       expired: dayjs().add(env.REFRESH_TOKEN_TTL_DAY, "days").toDate(),
     },
+    select: { id: true }
   })
   setRefreshToken(res, newRefreshToken)
 
   /* Create access token */
   const ttl = ms(`${env.ACCESS_TOKEN_TTL_HOUR} hours`)
   const accessToken = signToken<AccessTokenPayload>(
-    { id: existedEmail.id },
+    { id: existedEmail.id, sessionId: sessionId },
     ttl
   )
   setAccessToken(res, accessToken)

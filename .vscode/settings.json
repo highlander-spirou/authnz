@@ -9,5 +9,6 @@
   },
   "editor.quickSuggestions": {
     "strings": true
-  }
+  },
+  "todo-tree.tree.showBadges": true
 }

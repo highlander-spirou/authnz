@@ -1,5 +1,5 @@
 import prisma from "@lib/prisma"
-import { changeUserInfoDTO } from "@user/DTO"
+import { changeUserInfoDTO } from "@user/user.dto"
 import { UserException, UserExceptionEnum } from "@user/user.exceptions"
 import type { Request } from "express"
 

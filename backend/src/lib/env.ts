@@ -8,6 +8,10 @@ const env = createEnv({
     ENVIRONMENT: z.enum(["dev", "prod"]),
     APP_NAME: z.string(),
     APP_DOMAIN: z.string(),
+    SHOULD_THROTTLE: z
+      .string()
+      .refine((s) => s === "true" || s === "false")
+      .transform((s) => s === "true"),
 
     // Databases
     REDIS_PASSWORD: z.string(),
@@ -22,6 +26,7 @@ const env = createEnv({
     ACCESS_TOKEN_TTL_HOUR: z.coerce.number(),
     INVITE_USER_TTL_HOURS: z.coerce.number(),
     RESET_PASSWORD_TTL_HOURS: z.coerce.number(),
+    MFA_UUID_TTL_MINUTES: z.coerce.number(),
 
     // Email
     APP_EMAIL: z.string(),

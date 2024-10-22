@@ -1,5 +1,6 @@
 export type AccessTokenPayload = {
   id: number
+  sessionId: number
 }
 
 export type NewUserMagicLinkPayload = {

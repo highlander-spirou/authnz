@@ -10,7 +10,7 @@ import dayjs from "dayjs"
 import type { Request, Response, NextFunction } from "express"
 import ms from "ms"
 
-class AccessTokenDecryptFails extends Error {}
+class AccessTokenDecryptFails extends Error { }
 
 const userSessionGuard = async (
   req: Request,
@@ -31,7 +31,7 @@ const userSessionGuard = async (
         if (!payload) {
           throw new AccessTokenDecryptFails()
         }
-        req.context = { userId: payload.id }
+        req.context = { userId: payload.id, sessionId: payload.sessionId }
       } else {
         throw new AccessTokenDecryptFails()
       }
@@ -67,11 +67,11 @@ const userSessionGuard = async (
         /* Grant new access-token and continue granting the request */
         const ttl = ms(`${env.ACCESS_TOKEN_TTL_HOUR} minutes`)
         const newAccessToken = signToken<AccessTokenPayload>(
-          { id: token.user_id },
+          { id: token.user_id, sessionId: token.id },
           ttl
         )
         setAccessToken(res, newAccessToken)
-        req.context = { userId: token.user_id }
+        req.context = { userId: token.user_id, sessionId: token.id }
       } else {
         throw new AuthException(AuthExceptionEnum.UnknownError)
       }

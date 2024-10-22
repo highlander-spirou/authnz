@@ -31,7 +31,9 @@ const ProfileSection = () => {
   const { mutateAsync } = useMutation({
     mutationKey: changeUserInfoOptions.key,
     mutationFn: async () => await changeUserInfoOptions.fn({ name: inp }),
-    onSuccess: changeUserInfoOptions.onSuccess,
+    onSuccess: () => {
+      changeUserInfoOptions.invalidates()
+    },
   })
 
   const submitHandler = async (e: FormEvent) => {

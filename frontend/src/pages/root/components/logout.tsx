@@ -7,10 +7,17 @@ import {
 import { logoutOptions } from "@auth/queries/options"
 
 const LogoutMenuItem = () => {
-  const { mutate } = useMutation(logoutOptions)
+  const { mutate: logout } = useMutation({
+    mutationKey: logoutOptions.key,
+    mutationFn: logoutOptions.fn,
+    onSuccess: () => {
+      logoutOptions.invalidates()
+      window.location.reload()
+    },
+  })
 
   return (
-    <DropdownMenuItem variant="destructive" onClick={() => mutate()}>
+    <DropdownMenuItem variant="destructive" onClick={() => logout()}>
       Logout
       <DropdownMenuShortcut>
         <LogOutIcon className="w-4 h-4 stroke-red-500" />

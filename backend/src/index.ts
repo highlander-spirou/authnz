@@ -8,11 +8,11 @@ import env from "@lib/env"
 import swaggerui from "swagger-ui-express"
 import useragent from 'express-useragent'
 
-import authRouter from "@auth/index"
-import userRouter from "@user/index"
-import mfaRouter from "@mfa/index"
+import authRouter from "@auth/router"
+import userRouter from "@user/router"
+import mfaRouter from "@mfa/router"
 import swaggerDocument from "./docs"
-import { secureTeamRouter } from "./routers/team"
+import { secureTeamRouter } from "./routers/team/router"
 
 const app = express()
 
@@ -31,31 +31,19 @@ app.use(
 
 //#endregion 
 
-
-
 //#region Route register
-
 app.use("/auth", authRouter)
 app.use("/user", userRouter)
 app.use("/mfa", mfaRouter)
 app.use("/team", secureTeamRouter)
 
 app.use('/api-docs', swaggerui.serve, swaggerui.setup(swaggerDocument));
-
 //#endregion
 
-
-
-
-
-
-
 //#region Run the server
-
 const server = http.createServer(app)
 const PORT = Number(env.PORT ?? 8080)
 server.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`)
 })
-
 //#endregion

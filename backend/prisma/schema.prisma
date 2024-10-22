@@ -42,10 +42,17 @@ model LoginSession {
 }
 
 model Otp {
-  id           Int     @id @default(autoincrement())
-  user_id      Int     @unique
-  otp_enabled  Boolean @default(false)
-  otp_base32   String?
+  id          Int     @id @default(autoincrement())
+  user_id     Int     @unique
+  otp_enabled Boolean @default(false)
+  otp_base32  String?
+}
+
+model Biometric {
+  id                Int     @id @default(autoincrement())
+  user_id           Int     @unique
+  current_challenge String?
+  authenticator     Json?
 }
 
 model Team {
@@ -60,4 +67,11 @@ model TeamMember {
   role    RoleEnum @default(USER)
 
   @@id([user_id, team_id])
+}
+
+model MfaVerifyStatus {
+  id          Int       @id @default(autoincrement())
+  user_id     Int       @unique
+  uuid        String?   @unique
+  uuid_ttl    DateTime? @updatedAt
 }

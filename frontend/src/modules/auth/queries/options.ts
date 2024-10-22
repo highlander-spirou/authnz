@@ -5,12 +5,11 @@ import {
   logoutSessionRequest,
 } from "./fetcher"
 import userKeys from "@user/queries/queryKeyFactories"
-import { AxiosError } from "axios"
 
 export const logoutSessionOptions = {
   key: userKeys.devices,
   fn: logoutSessionRequest,
-  onSuccessHandler: () => {
+  invalidates: () => {
     queryClient.invalidateQueries({
       queryKey: userKeys.devices,
     })
@@ -20,9 +19,8 @@ export const logoutSessionOptions = {
 export const logoutOptions = {
   key: userKeys.info,
   fn: logoutRequest,
-  onSuccess: () => {
+  invalidates: () => {
     queryClient.invalidateQueries({ queryKey: userKeys.info })
-    window.location.reload()
   },
 }
 
